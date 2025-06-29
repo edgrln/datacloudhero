@@ -9,11 +9,13 @@ const config: Config = {
 
   future: { v4: true },
 
-  url: 'https://your-docusaurus-site.example.com',
-  baseUrl: '/',
+  url: 'https://edgrln/github.com',
+  baseUrl: '/datacloudhero',
 
   organizationName: 'facebook',
-  projectName: 'docusaurus',
+  projectName: 'datacloudhero',
+  deploymentBranch: "gh-pages",
+
 
   onBrokenLinks: 'throw',
   onBrokenMarkdownLinks: 'warn',
