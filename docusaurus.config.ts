@@ -10,7 +10,7 @@ const config: Config = {
   future: { v4: true },
 
   url: 'https://edgrln/github.com',
-  baseUrl: '/datacloudhero',
+  baseUrl: '/datacloudheroe/',
 
   organizationName: 'facebook',
   projectName: 'datacloudhero',
