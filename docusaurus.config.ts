@@ -30,6 +30,13 @@ const config: Config = {
     [
       'classic',
       {
+        /* --- GTM --- */
+        googleTagManager: {
+          containerId: 'GTM-MKSVW4QD',   // ← замени на свой реальный ID
+          // при необходимости можно добавить:
+          // dataLayerName: 'dataLayer',
+          // preview: 'env-42',
+        },
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl:
