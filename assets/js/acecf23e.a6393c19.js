@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkdatacloudhero=self.webpackChunkdatacloudhero||[]).push([[1903],{1912:a=>{a.exports=JSON.parse('{"blogBasePath":"/datacloudheroe/blog","blogTitle":"Blog","authorsListPath":"/datacloudheroe/blog/authors"}')}}]);

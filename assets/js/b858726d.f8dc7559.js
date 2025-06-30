@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkdatacloudhero=self.webpackChunkdatacloudhero||[]).push([[8247],{3815:a=>{a.exports=JSON.parse('{"metadata":{"permalink":"/datacloudhero/blog","page":1,"postsPerPage":10,"totalPages":1,"totalCount":4,"blogDescription":"Blog","blogTitle":"Blog"}}')}}]);
