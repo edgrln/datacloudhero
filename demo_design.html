@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>DataCloudHero - Управляйте данными с AI</title>
+<style>
+  /* Сброс и базовые стили */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: #F5F7FA;
+    color: #222;
+    line-height: 1.6;
+  }
+  a {
+    color: #4BCFFF;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  a:hover {
+    color: #3BE27F;
+  }
+  /* Хедер */
+  header {
+    background: #1A2A6C;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: 2px;
+    cursor: default;
+  }
+  nav {
+    display: flex;
+    gap: 25px;
+    font-weight: 600;
+  }
+  nav a {
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+  }
+  nav a:hover {
+    color: #3BE27F;
+  }
+  .btn-cta {
+    background: #4BCFFF;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 25px;
+    font-weight: 700;
+    color: #1A2A6C;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+  }
+  .btn-cta:hover {
+    background: #3BE27F;
+    color: white;
+  }
+  /* Hero Section */
+  .hero {
+    background: linear-gradient(135deg, #1A2A6C 0%, #4BCFFF 100%);
+    color: white;
+    padding: 100px 20px 80px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .hero-text {
+    max-width: 600px;
+  }
+  .hero-text h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.2rem;
+    margin-bottom: 20px;
+    line-height: 1.1;
+  }
+  .hero-text p {
+    font-size: 1.25rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+  }
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+  }
+  .btn-primary {
+    background: #3BE27F;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #1A2A6C;
+    transition: background-color 0.3s;
+  }
+  .btn-primary:hover {
+    background: #2ecc66;
+  }
+  .btn-secondary {
+    background: transparent;
+    border: 2px solid white;
+    padding: 15px 30px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    color: white;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .btn-secondary:hover {
+    background: white;
+    color: #1A2A6C;
+  }
+  .hero-image {
+    max-width: 500px;
+    flex-shrink: 0;
+  }
+  .hero-image img {
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 12px 30px rgba(27, 38, 97, 0.5);
+  }
+  /* Features Section */
+  .features {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    flex-wrap: wrap;
+  }
+  .feature-card {
+    background: white;
+    padding: 30px;
+    flex: 1 1 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+  }
+  .feature-icon {
+    font-size: 3rem;
+    color: #4BCFFF;
+    margin-bottom: 20px;
+  }
+  .feature-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+    margin-bottom: 10px;
+  }
+  .feature-desc {
+    color: #555;
+    font-size: 1rem;
+  }
+  /* Video Section */
+  .video-section {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .video-section iframe {
+    width: 100%;
+    height: 500px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(27, 38, 97, 0.3);
+  }
+  .video-section p {
+    margin-top: 20px;
+    font-size: 1.15rem;
+    color: #333;
+  }
+  /* Testimonials */
+  .testimonials {
+    background: white;
+    padding: 60px 20px;
+  }
+  .testimonials-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .testimonial {
+    background: #F5F7FA;
+    flex: 0 0 300px;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .testimonial img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  .testimonial-text {
+    font-style: italic;
+    color: #444;
+    flex-grow: 1;
+  }
+  .testimonial-author {
+    font-weight: 700;
+    color: #1A2A6C;
+  }
+  /* Pricing Section */
+  .pricing {
+    max-width: 1100px;
+    margin: 80px auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+  .price-card {
+    background: white;
+    flex: 1 1 280px;
+    border-radius: 20px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    padding: 40px 30px;
+    text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: default;
+  }
+  .price-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+  }
+  .price-title {
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+  }
+  .price-amount {
+    font-size: 2.5rem;
+    color: #3BE27F;
+    margin-bottom: 20px;
+    font-weight: 800;
+  }
+  .price-details {
+    color: #555;
+    margin-bottom: 30px;
+    font-size: 1rem;
+  }
+  .btn-select {
+    background: #4BCFFF;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 700;
+    color: #1A2A6C;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  .btn-select:hover {
+    background: #3BE27F;
+    color: white;
+  }
+  .recommended {
+    border: 3px solid #3BE27F;
+  }
+  /* Footer */
+  footer {
+    background: #1A2A6C;
+    color: white;
+    padding: 40px 20px;
+    text-align: center;
+  }
+  footer a {
+    color: #4BCFFF;
+  }
+  footer a:hover {
+    color: #3BE27F;
+  }
+  footer .footer-links {
+    margin-bottom: 20px;
+  }
+  footer input[type="email"] {
+    padding: 10px 15px;
+    border-radius: 25px;
+    border: none;
+    width: 250px;
+    max-width: 80%;
+    margin-right: 10px;
+    font-size: 1rem;
+  }
+  footer button {
+    background: #3BE27F;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    color: #1A2A6C;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  footer button:hover {
+    background: #2ecc66;
+  }
+  /* Responsive */
+  @media (max-width: 900px) {
+    .hero {
+      flex-direction: column;
+      padding: 60px 20px 60px;
+    }
+    .hero-text h1 {
+      font-size: 2.4rem;
+    }
+    .features {
+      flex-direction: column;
+      max-width: 90%;
+      margin: 40px auto;
+    }
+    .pricing {
+      flex-direction: column;
+      max-width: 90%;
+      margin: 40px auto;
+    }
+    nav {
+      display: none; /* для простоты — меню можно сделать бургером */
+    }
+    header {
+      padding: 15px 20px;
+      justify-content: space-between;
+    }
+  }
+</style>
+<!-- Подключение шрифтов -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<header>
+  <div class="logo">DataCloudHero</div>
+  <nav>
+    <a href="#">Продукт</a>
+    <a href="#">Цены</a>
+    <a href="#">Ресурсы</a>
+    <a href="#">О нас</a>
+    <a href="#" class="btn-cta">Войти</a>
+  </nav>
+  <button class="btn-cta">Попробовать бесплатно</button>
+</header>
+
+<section class="hero">
+  <div class="hero-text">
+    <h1>Управляйте данными в облаке с помощью AI</h1>
+    <p>Безопасно, быстро и эффективно. Используйте искусственный интеллект для анализа и автоматизации процессов.</p>
+    <div class="hero-buttons">
+      <button class="btn-primary">Начать сейчас</button>
+      <button class="btn-secondary">Посмотреть демо</button>
+    </div>
+  </div>
+  <div class="hero-image">
+    <img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=600&q=80" alt="Облачные технологии и AI">
+  </div>
+</section>
+
+<section class="features" aria-label="Преимущества">
+  <div class="feature-card">
+    <div class="feature-icon">🔒</div>
+    <h3 class="feature-title">Безопасность</h3>
+    <p class="feature-desc">Ваши данные защищены на высшем уровне благодаря современным протоколам и шифрованию.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">⚡</div>
+    <h3 class="feature-title">Скорость</h3>
+    <p class="feature-desc">Мгновенная обработка больших объемов данных с помощью AI и облачных ресурсов.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">🔗</div>
+    <h3 class="feature-title">Интеграции</h3>
+    <p class="feature-desc">Поддержка популярных сервисов и API для удобства работы и масштабируемости.</p>
+  </div>
+  <div class="feature-card">
+    <div class="feature-icon">☁️</div>
+    <h3 class="feature-title">Масштабируемость</h3>
+    <p class="feature-desc">Автоматическое масштабирование ресурсов под ваши нужды без задержек.</p>
+  </div>
+</section>
+
+<section class="video-section" aria-label="Видео обзор">
+  <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Обзор продукта" frameborder="0" allowfullscreen></iframe>
+  <p>Посмотрите, как DataCloudHero упрощает управление данными в облаке с помощью AI.</p>
+</section>
+
+<section class="testimonials" aria-label="Отзывы клиентов">
+  <div class="testimonials-container">
+    <div class="testimonial">
+      <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Фото клиента" />
+      <p class="testimonial-text">«DataCloudHero значительно ускорил наши процессы анализа данных. Рекомендую!»</p>
+      <p class="testimonial-author">— Ольга Петрова, CTO</p>
+    </div>
+    <div class="testimonial">
+      <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Фото клиента" />
+      <p class="testimonial-text">«Безопасность и простота использования — главное для нашей команды. Спасибо!»</p>
+      <p class="testimonial-author">— Алексей Иванов, Data Engineer</p>
+    </div>
+    <div class="testimonial">
+      <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Фото клиента" />
+      <p class="testimonial-text">«Отличный сервис с мощными интеграциями и поддержкой AI.»</p>
+      <p class="testimonial-author">— Мария Сидорова, Project Manager</p>
+    </div>
+  </div>
+</section>
+
+<section class="pricing" aria-label="Цены">
+  <div class="price-card">
+    <h3 class="price-title">Базовый</h3>
+    <p class="price-amount">₽0 <span style="font-size:1rem;">/ мес</span></p>
+    <p class="price-details">До 1 ГБ хранения и базовые функции</p>
+    <button class="btn-select">Выбрать</button>
+  </div>
+  <div class="price-card recommended">
+    <h3 class="price-title">Профессиональный</h3>
+    <p class="price-amount">₽1990 <span style="font-size:1rem;">/ мес</span></p>
+    <p class="price-details">50 ГБ, расширенный AI-анализ, приоритетная поддержка</p>
+    <button class="btn-select">Выбрать</button>
+  </div>
+  <div class="price-card">
+    <h3 class="price-title">Корпоративный</h3>
+    <p class="price-amount">По запросу</p>
+    <p class="price-details">Безлимитное хранение, индивидуальные решения</p>
+    <button class="btn-select">Связаться с нами</button>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-links">
+    <a href="#">Политика конфиденциальности</a> | 
+    <a href="#">Условия использования</a>
+  </div>
+  <form onsubmit="event.preventDefault();" style="margin-bottom:20px;">
+    <input type="email" placeholder="Ваш Email" required />
+    <button type="submit">Подписаться</button>
+  </form>
+  <p>© 2025 DataCloudHero. Все права защищены.</p>
+</footer>
+
+</body>
+</html>
