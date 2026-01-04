@@ -21,7 +21,7 @@ jobs:
       # 2. Настраиваем Node и включаем кеш для npm
       - uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: 22
           cache: npm            # <-- переключили cache с yarn на npm
 
       # 3. Устанавливаем зависимости
