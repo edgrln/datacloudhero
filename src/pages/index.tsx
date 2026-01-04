@@ -5,10 +5,13 @@ import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import Layout from '@theme/Layout';
 import HomepageFeatures from '@site/src/components/HomepageFeatures';
 import Heading from '@theme/Heading';
-
-
-
 import styles from './index.module.css';
+
+
+
+import useGlobalData from '@docusaurus/useGlobalData';
+
+
 
 
 
@@ -35,9 +38,19 @@ function HomepageHeader() {
 }
 
 export default function Home(): ReactNode {
-  
   const {siteConfig} = useDocusaurusContext();
-  
+
+  const globalData = useGlobalData();
+
+
+
+
+  // const latest = posts.slice(0, 3);
+
+  console.log(globalData)
+
+
+
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}

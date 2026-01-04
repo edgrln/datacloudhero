@@ -10,9 +10,9 @@ const config: Config = {
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
-  future: {
-    v4: true, // Improve compatibility with the upcoming Docusaurus v4
-  },
+  // future: {
+  //   v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  // },
 
   // Set the production url of your site here
   url: 'https://your-docusaurus-site.example.com',
@@ -41,12 +41,14 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
+          onInlineTags: 'warn',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
           editUrl:
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          id: 'rrr',
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -62,13 +64,17 @@ const config: Config = {
           onUntruncatedBlogPosts: 'warn',
           blogSidebarTitle: 'All posts',
           blogSidebarCount: 3,
-        },
+        }, 
         theme: {
           customCss: './src/css/custom.css',
         },
       } satisfies Preset.Options,
     ],
   ],
+
+  plugins: [
+      require.resolve('@cmfcmf/docusaurus-search-local'),
+    ],
 
   themeConfig: {
     // Replace with your project's social card
@@ -106,6 +112,15 @@ const config: Config = {
             {
               label: 'Tutorial',
               to: '/docs/intro',
+            },
+          ],
+        },
+                {
+          title: 'Blog',
+          items: [
+            {
+              label: 'Blog',
+              to: '/blog',
             },
           ],
         },
