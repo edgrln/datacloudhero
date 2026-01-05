@@ -1,66 +1,79 @@
-import type {ReactNode} from 'react';
-import clsx from 'clsx';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import React, {useEffect, useState} from 'react';
 import Layout from '@theme/Layout';
-import HomepageFeatures from '@site/src/components/HomepageFeatures';
-import Heading from '@theme/Heading';
-import styles from './index.module.css';
+import Link from '@docusaurus/Link';
 
+type RssPost = {
+  title: string;
+  link: string;
+  pubDate: string;
+  description: string;
+};
 
+export default function Home(): JSX.Element {
+  const [posts, setPosts] = useState<RssPost[]>([]);
 
-import useGlobalData from '@docusaurus/useGlobalData';
+  useEffect(() => {
+    async function loadRss() {
+      const res = await fetch('/blog/rss.xml');
+      const text = await res.text();
 
+      const xml = new window.DOMParser().parseFromString(text, 'text/xml');
+      const items = Array.from(xml.querySelectorAll('item')).slice(0, 3);
 
+      const parsed: RssPost[] = items.map((item) => {
+        const rawDescription =
+          item.querySelector('description')?.textContent ?? '';
 
+        // чистим пробелы и переносы
+        const description = rawDescription.trim();
 
+        return {
+          title: item.querySelector('title')?.textContent ?? '',
+          link: item.querySelector('link')?.textContent ?? '',
+          pubDate: item.querySelector('pubDate')?.textContent ?? '',
+          description,
+        };
+      });
 
+      setPosts(parsed);
+    }
 
-function HomepageHeader() {
-  const {siteConfig} = useDocusaurusContext();
-  return (
-    <header className={clsx('hero hero--primary', styles.heroBanner)}>
-      <div className="container">
-        <Heading as="h1" className="hero__title">
-          {siteConfig.title}
-        </Heading>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link
-            className="button button--secondary button--lg"
-            to="/docs/intro">
-            Docusaurus Tutorial - 5min ⏱️
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
-
-export default function Home(): ReactNode {
-  const {siteConfig} = useDocusaurusContext();
-
-  const globalData = useGlobalData();
-
-
-
-
-  // const latest = posts.slice(0, 3);
-
-  console.log(globalData)
-
-
+    loadRss();
+  }, []);
 
   return (
-    <Layout
-      title={`Hello from ${siteConfig.title}`}
-      description="Description will go into a meta tag in <head />">
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
+    <Layout title="Главная">
+      <main style={{padding: '2rem 0'}}>
+        <section style={{maxWidth: 800, margin: '0 auto'}}>
+          <h1>Главная</h1>
+
+          <h2 style={{marginTop: '2rem'}}>Последние посты</h2>
+
+          {posts.length === 0 && <p>Загружаем посты…</p>}
+
+          <ul style={{listStyle: 'none', padding: 0}}>
+            {posts.map((post) => (
+              <li key={post.link} style={{marginBottom: '1.5rem'}}>
+                <h3 style={{margin: 0}}>
+                  <Link to={post.link}>{post.title}</Link>
+                </h3>
+
+                {post.pubDate && (
+                  <div style={{fontSize: '0.85rem', opacity: 0.7}}>
+                    {new Date(post.pubDate).toLocaleDateString('ru-RU')}
+                  </div>
+                )}
+
+                {post.description && post.description !== '' && (
+                  <p style={{marginTop: '0.3rem'}}>
+                    {post.description}
+                  </p>
+                )}
+              </li>
+            ))}
+          </ul>
+        </section>
       </main>
     </Layout>
   );
 }
-
-

@@ -63,7 +63,7 @@ const config: Config = {
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
           blogSidebarTitle: 'All posts',
-          blogSidebarCount: 3,
+          blogSidebarCount: 'ALL',
         }, 
         theme: {
           customCss: './src/css/custom.css',
@@ -73,7 +73,12 @@ const config: Config = {
   ],
 
   plugins: [
-      require.resolve('@cmfcmf/docusaurus-search-local'),
+            [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+      },
+    ],
     ],
 
   themeConfig: {
@@ -97,7 +102,7 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/edgrln/datacloudhero',
           label: 'GitHub',
           position: 'right',
         },
@@ -115,29 +120,12 @@ const config: Config = {
             },
           ],
         },
-                {
-          title: 'Blog',
-          items: [
-            {
-              label: 'Blog',
-              to: '/blog',
-            },
-          ],
-        },
         {
           title: 'Community',
           items: [
             {
-              label: 'Stack Overflow',
-              href: 'https://stackoverflow.com/questions/tagged/docusaurus',
-            },
-            {
-              label: 'Discord',
-              href: 'https://discordapp.com/invite/docusaurus',
-            },
-            {
               label: 'X',
-              href: 'https://x.com/docusaurus',
+              href: 'https://x.com/datacloudhero',
             },
           ],
         },
@@ -150,12 +138,12 @@ const config: Config = {
             },
             {
               label: 'GitHub',
-              href: 'https://github.com/facebook/docusaurus',
+              href: 'https://github.com/edgrln/datacloudhero',
             },
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} My Project, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} datacloudhero.com`,
     },
     prism: {
       theme: prismThemes.github,
