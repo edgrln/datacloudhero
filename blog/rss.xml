@@ -4,10 +4,43 @@
         <title>My Site Blog</title>
         <link>https://your-docusaurus-site.example.com/blog</link>
         <description>My Site Blog</description>
-        <lastBuildDate>Thu, 26 Aug 2021 00:00:00 GMT</lastBuildDate>
+        <lastBuildDate>Thu, 01 Jan 2026 00:00:00 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>https://github.com/jpmonette/feed</generator>
         <language>en</language>
+        <item>
+            <title><![CDATA[Марина математик]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/marina-blog-post</link>
+            <guid>https://your-docusaurus-site.example.com/blog/marina-blog-post</guid>
+            <pubDate>Thu, 01 Jan 2026 00:00:00 GMT</pubDate>
+            <description><![CDATA[Марина МаринаМаринаМаринаМаринаМарина...]]></description>
+            <content:encoded><![CDATA[<p>Марина МаринаМаринаМаринаМаринаМарина...</p>
+<p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
+            <category>Hola</category>
+            <category>Docusaurus</category>
+        </item>
+        <item>
+            <title><![CDATA[Антон молодец]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/anton-cool</link>
+            <guid>https://your-docusaurus-site.example.com/blog/anton-cool</guid>
+            <pubDate>Wed, 28 May 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Lorem ipsum dolor sit amet...]]></description>
+            <content:encoded><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
+<p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
+            <category>Hola</category>
+            <category>Docusaurus</category>
+        </item>
+        <item>
+            <title><![CDATA[Эдгар молодец]]></title>
+            <link>https://your-docusaurus-site.example.com/blog/edgar-cool</link>
+            <guid>https://your-docusaurus-site.example.com/blog/edgar-cool</guid>
+            <pubDate>Wed, 28 May 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Lorem ipsum dolor sit amet...]]></description>
+            <content:encoded><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
+<p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
+            <category>Hola</category>
+            <category>Docusaurus</category>
+        </item>
         <item>
             <title><![CDATA[Welcome]]></title>
             <link>https://your-docusaurus-site.example.com/blog/welcome</link>
