@@ -1,1 +1,0 @@
-"use strict";(globalThis.webpackChunkdatacloudhero=globalThis.webpackChunkdatacloudhero||[]).push([[7788],{3222(a){a.exports=JSON.parse('{"blogBasePath":"/blog","blogTitle":"Blog","authorsListPath":"/blog/authors"}')}}]);
