@@ -42,14 +42,14 @@ export default function Home(): JSX.Element {
   }, []);
 
   return (
-    <Layout title="Главная">
+    <Layout title="Main">
       <main style={{padding: '2rem 0'}}>
         <section style={{maxWidth: 800, margin: '0 auto'}}>
-          <h1>Главная</h1>
+          <h1>Main</h1>
 
-          <h2 style={{marginTop: '2rem'}}>Последние посты</h2>
+          <h2 style={{marginTop: '2rem'}}>Latests posts</h2>
 
-          {posts.length === 0 && <p>Загружаем посты…</p>}
+          {posts.length === 0 && <p>Uploading posts…</p>}
 
           <ul style={{listStyle: 'none', padding: 0}}>
             {posts.map((post) => (

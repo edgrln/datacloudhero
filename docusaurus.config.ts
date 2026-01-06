@@ -48,7 +48,6 @@ const config: Config = {
             'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          id: 'rrr',
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -88,9 +87,8 @@ const config: Config = {
       respectPrefersColorScheme: true,
     },
     navbar: {
-      title: 'My Site',
       logo: {
-        alt: 'My Site Logo',
+        alt: 'datacloudhero.com',
         src: 'img/logo.svg',
       },
       items: [
@@ -124,8 +122,8 @@ const config: Config = {
           title: 'Community',
           items: [
             {
-              label: 'X',
-              href: 'https://x.com/datacloudhero',
+              label: 'GitHub',
+              href: 'https://github.com/edgrln/datacloudhero',
             },
           ],
         },
@@ -136,14 +134,11 @@ const config: Config = {
               label: 'Blog',
               to: '/blog',
             },
-            {
-              label: 'GitHub',
-              href: 'https://github.com/edgrln/datacloudhero',
-            },
           ],
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} datacloudhero.com`,
+      
     },
     prism: {
       theme: prismThemes.github,
