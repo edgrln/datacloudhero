@@ -1,0 +1,59 @@
+
+.card {
+  background: rgba(20, 25, 35, 0.9);
+  border-radius: 16px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 320px;         /* ширина карточки */
+  margin-left: auto;        /* ← выравнивание вправо */
+
+}
+
+.theme-light .card {
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.avatar {
+  width: 86px;
+  height: 86px;
+  border-radius: 50%;
+  margin-bottom: 12px;
+}
+
+.name {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.title {
+  margin: 6px 0 10px 0;
+  opacity: 0.8;
+}
+
+.desc {
+  opacity: 0.85;
+  font-size: 14px;
+  line-height: 1.5;
+  margin: 0 0 12px 0;
+}
+
+.social {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+.social a {
+  opacity: 0.85;
+  transition: opacity 0.2s ease;
+}
+
+.social a:hover {
+  opacity: 1;
+}

@@ -1,78 +1,69 @@
-import React, {useEffect, useState} from 'react';
-import Layout from '@theme/Layout';
+import type {ReactNode} from 'react';
+import clsx from 'clsx';
 import Link from '@docusaurus/Link';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import Layout from '@theme/Layout';
+import Heading from '@theme/Heading';
 
-type RssPost = {
-  title: string;
-  link: string;
-  pubDate: string;
-  description: string;
-};
+import styles from './index.module.css';
 
-export default function Home(): JSX.Element {
-  const [posts, setPosts] = useState<RssPost[]>([]);
+import HomepageTopics from "../components/HomepageTopics";
+import AuthorCard from "../components/AuthorCard";
 
-  useEffect(() => {
-    async function loadRss() {
-      const res = await fetch('/blog/rss.xml');
-      const text = await res.text();
 
-      const xml = new window.DOMParser().parseFromString(text, 'text/xml');
-      const items = Array.from(xml.querySelectorAll('item')).slice(0, 3);
-
-      const parsed: RssPost[] = items.map((item) => {
-        const rawDescription =
-          item.querySelector('description')?.textContent ?? '';
-
-        // чистим пробелы и переносы
-        const description = rawDescription.trim();
-
-        return {
-          title: item.querySelector('title')?.textContent ?? '',
-          link: item.querySelector('link')?.textContent ?? '',
-          pubDate: item.querySelector('pubDate')?.textContent ?? '',
-          description,
-        };
-      });
-
-      setPosts(parsed);
-    }
-
-    loadRss();
-  }, []);
+function HomepageHeader() {
+  const {siteConfig} = useDocusaurusContext();
 
   return (
-    <Layout title="Main">
-      <main style={{padding: '2rem 0'}}>
-        <section style={{maxWidth: 800, margin: '0 auto'}}>
-          <h1>Main</h1>
+    <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <div className="container">
+        <Heading as="h1" className="hero__title">
+          {siteConfig.title}
+        </Heading>
 
-          <h2 style={{marginTop: '2rem'}}>Latests posts</h2>
+        <p className="hero__subtitle">{siteConfig.tagline}</p>
 
-          {posts.length === 0 && <p>Uploading posts…</p>}
+        <div className={styles.buttons}>
+          <Link
+            className="button button--secondary button--lg"
+            to="/docs/intro">
+            Docusaurus Tutorial - 5min ⏱️
+          </Link>
+        </div>
+      </div>
+    </header>
+  );
+}
 
-          <ul style={{listStyle: 'none', padding: 0}}>
-            {posts.map((post) => (
-              <li key={post.link} style={{marginBottom: '1.5rem'}}>
-                <h3 style={{margin: 0}}>
-                  <Link to={post.link}>{post.title}</Link>
-                </h3>
 
-                {post.pubDate && (
-                  <div style={{fontSize: '0.85rem', opacity: 0.7}}>
-                    {new Date(post.pubDate).toLocaleDateString('ru-RU')}
-                  </div>
-                )}
+export default function Home(): ReactNode {
+  const {siteConfig} = useDocusaurusContext();
 
-                {post.description && post.description !== '' && (
-                  <p style={{marginTop: '0.3rem'}}>
-                    {post.description}
-                  </p>
-                )}
-              </li>
-            ))}
-          </ul>
-        </section>
+  return (
+    <Layout
+      title={siteConfig.title}
+      description="Description will go into a meta tag in <head />">
+
+      <HomepageHeader />
+
+      <main>
+
+        {/* Секция с темами */}
+        <HomepageTopics />
+
+        {/* Карточка автора */}
+        <div className="container" style={{marginTop: '2rem'}}>
+          <AuthorCard
+            name="Yangshun Tay"
+            title="Ex-Meta Staff Engineer, Co-founder @metatext"
+            description="15 лет в IT. Пишу про AI & Data Engineering, карьеру и рост инженеров."
+            avatarUrl="https://avatars.githubusercontent.com/u/78014277?v=4"
+            github="https://github.com/yangshun"
+            linkedin="https://linkedin.com"
+            twitter="https://twitter.com"
+          />
+        </div>
+
       </main>
     </Layout>
   );
