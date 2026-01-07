@@ -4,8 +4,15 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 // This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
 
+const BLOG = {
+  link: '/',
+  label: 'Blog'
+
+};
+
+
 const config: Config = {
-  title: 'My Site',
+  title: 'docusaurus.com',
   tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
@@ -44,10 +51,11 @@ const config: Config = {
           onInlineTags: 'warn',
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
+          routeBasePath: BLOG.link, // <-- вот это главное
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
@@ -55,8 +63,8 @@ const config: Config = {
           },
           // Please change this to your repo.
           // Remove this to remove the "edit this page" links.
-          editUrl:
-            'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
           // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
@@ -98,7 +106,7 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        {to: '/blog', label: 'Blog', position: 'left'},
+        {to: BLOG.link, label: BLOG.label, position: 'left'},
         {
           href: 'https://github.com/edgrln/datacloudhero',
           label: 'GitHub',
@@ -131,8 +139,8 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: 'Blog',
-              to: '/blog',
+              label: BLOG.label,
+              to: BLOG.link,
             },
           ],
         },
