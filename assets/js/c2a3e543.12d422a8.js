@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdatacloudhero=globalThis.webpackChunkdatacloudhero||[]).push([[8885],{2937(a){a.exports=JSON.parse('{"tags":[{"label":"hola","permalink":"/tags/hola","count":1},{"label":"docusaurus","permalink":"/tags/docusaurus","count":1}]}')}}]);

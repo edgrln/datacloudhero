@@ -1,0 +1,1 @@
+"use strict";(globalThis.webpackChunkdatacloudhero=globalThis.webpackChunkdatacloudhero||[]).push([[7472],{5513(t){t.exports=JSON.parse('{"title":"All posts","items":[{"title":"First Blog Post","permalink":"/first-blog-post","unlisted":false,"date":"2019-05-28T00:00:00.000Z"}]}')}}]);
