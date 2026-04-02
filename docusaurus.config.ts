@@ -98,6 +98,8 @@ const config: Config = {
       logo: {
         alt: 'datacloudhero.com',
         src: 'img/logo.svg',
+        href: 'https://github.com/edgrln/my-flask-app',  // ← твой лендинг
+        target: '_self',
       },
       items: [
         {
