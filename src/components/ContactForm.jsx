@@ -12,7 +12,7 @@ export default function ContactForm() {
     try {
       const formData = new FormData(e.target);
 
-      const response = await fetch('https://script.google.com/macros/s/AKfycbx_UJYtrVQLNOb9I09PHyqSY802ncBFIBpCaPWVXIF4xTrYkD-W1Nczztp5B6hcSI8s/useweb', {
+      const response = await fetch('https://script.google.com/macros/s/AKfycbznw_we3pyLH9nAGfzgE_nk8qlsJQ9Z8uk5huQOOvCDvRVoLkoje9rG2GROrgXEHkui/useweb', {
         method: 'POST',
         body: formData
       });
