@@ -1,0 +1,49 @@
+---
+title: Contact
+---
+
+# Get in Touch
+
+<form id="contactForm" style={{maxWidth: '500px', margin: '0 auto'}}>
+  <input 
+    type="text" 
+    name="name" 
+    placeholder="Your name" 
+    required
+    style={{width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '8px'}}
+  />
+  <input 
+    type="email" 
+    name="email" 
+    placeholder="e.lakshin@gmail.com" 
+    required
+    style={{width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '8px'}}
+  />
+  <textarea 
+    name="message" 
+    placeholder="Your message..." 
+    required
+    rows="5"
+    style={{width: '100%', padding: '10px', marginBottom: '10px', borderRadius: '8px'}}
+  />
+  <button type="submit" style={{padding: '10px 20px', background: '#1bab53', color: 'white'}}>
+    Send
+  </button>
+</form>
+
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script>{`
+document.getElementById('contactForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const token = await grecaptcha.execute('6LfPItssAAAAAO1KKeyise8qIfg9A4oShIMcbxUv', {action: 'submit'});
+  formData.append('recaptchaToken', token);
+  
+  const response = await fetch('https://script.google.com/macros/s/AKfycbwQ-jzXFEFJ4J-Vbtptlb4YUkfBzjAgXA1P_YZct6KFS0eBor8tQsZoHw8u3R3pO_eM/exec', {
+    method: 'POST',
+    body: formData
+  });
+  const result = await response.json();
+  alert(result.message);
+});
+`}</script>
