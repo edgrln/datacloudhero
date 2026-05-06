@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 
-const SCRIPT_URL = ''/api/contact'';
+const SCRIPT_URL = '/api/contact';
 
 export default function ContactPage(): JSX.Element {
   const [formData, setFormData] = useState({name: '', email: '', message: ''});
