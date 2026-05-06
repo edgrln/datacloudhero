@@ -71,7 +71,10 @@ const config: Config = {
           onUntruncatedBlogPosts: 'warn',
           blogSidebarTitle: 'All posts',
           blogSidebarCount: 'ALL',
-        }, 
+        },
+        googleTagManager: {
+          containerId: 'GTM-MKSVW4QD',
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
