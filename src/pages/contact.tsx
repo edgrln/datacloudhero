@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx-vXr0H4_MSPtGt81S0D4ariFvSjxGTwdT1x5cvuIDWll2GO63Q0YvQ_UAwbO-8fdv/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyInCde13Tv1bYiQGw-Se_RTIKaXBFiyrOv5cL8zOnoXhZbo37YAtubmULU06hAqJ2s/exec';
 
 export default function ContactPage(): JSX.Element {
   const [formData, setFormData] = useState({name: '', email: '', message: ''});
@@ -22,10 +22,9 @@ export default function ContactPage(): JSX.Element {
       const response = await fetch(SCRIPT_URL, {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
         },
-        body: JSON.stringify(formData),
-        mode: 'cors',
+        body: new URLSearchParams(formData).toString(),
       });
 
       if (!response.ok) {
