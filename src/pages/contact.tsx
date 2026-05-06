@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Layout from '@theme/Layout';
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwWNaLHtGg7VyT3oW1yK3nWmlSeFgb1vRS72OJBAvEd9CbGt8nvXBB392tfoA0JwCqv/exec';
 
 export default function ContactPage(): JSX.Element {
   const [formData, setFormData] = useState({name: '', email: '', message: ''});
