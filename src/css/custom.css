@@ -4,7 +4,7 @@
  * work well for content-centric websites.
  */
 
-/* Default light theme variables */
+/* Light theme */
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -18,7 +18,7 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme variables */
+/* Dark theme */
 [data-theme='dark'] {
   --ifm-color-primary: #1bab53;
   --ifm-color-primary-dark: #189a4b;
@@ -28,112 +28,116 @@
   --ifm-color-primary-lighter: #1fc55f;
   --ifm-color-primary-lightest: #25dd6c;
 
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: #040810;
-
-  /* Global dark background */
   --ifm-background-color: #040810;
-  --ifm-background-surface-color: #040810;
-  --ifm-navbar-background-color: rgba(17, 24, 39, 0.9);
+  --ifm-background-surface-color: transparent;
+  --ifm-navbar-background-color: rgba(4, 8, 16, 0.92);
   --ifm-footer-background-color: #040810;
-  --ifm-card-background-color: rgba(15, 23, 42, 0.72);
+
+  --ifm-code-font-size: 95%;
+  --docusaurus-highlighted-code-line-bg: #07111f;
 }
 
-/* Global blog background */
-[data-theme='dark'] body {
+/* One global background for the whole site */
+html[data-theme='dark'],
+html[data-theme='dark'] body {
+  min-height: 100%;
+  background-color: #040810;
+}
+
+/* Background gradient */
+html[data-theme='dark'] body {
   background:
-    radial-gradient(circle at 20% 20%, rgba(27, 171, 83, 0.12), transparent 28%),
+    radial-gradient(circle at 20% 15%, rgba(27, 171, 83, 0.12), transparent 28%),
     radial-gradient(circle at 80% 10%, rgba(59, 130, 246, 0.08), transparent 24%),
     linear-gradient(135deg, #040810 0%, #07111f 55%, #0f172a 100%);
   color: #e5e7eb;
 }
 
-/* Grid background like the contact form */
-[data-theme='dark'] body::before {
+/* Grid overlay */
+html[data-theme='dark'] body::before {
   content: '';
   position: fixed;
   inset: 0;
+  z-index: 0;
   pointer-events: none;
-  z-index: -1;
   background-image:
-    linear-gradient(rgba(27, 171, 83, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(27, 171, 83, 0.07) 1px, transparent 1px);
+    linear-gradient(rgba(27, 171, 83, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27, 171, 83, 0.06) 1px, transparent 1px);
   background-size: 72px 72px;
 }
 
-/* Make Docusaurus wrappers transparent */
-[data-theme='dark'] #__docusaurus,
-[data-theme='dark'] .main-wrapper,
-[data-theme='dark'] main,
-[data-theme='dark'] article {
+/* Put Docusaurus content above the grid */
+html[data-theme='dark'] #__docusaurus {
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  min-height: 100vh;
+}
+
+/* Make main wrappers transparent */
+html[data-theme='dark'] .main-wrapper,
+html[data-theme='dark'] main,
+html[data-theme='dark'] article,
+html[data-theme='dark'] .container,
+html[data-theme='dark'] .row,
+html[data-theme='dark'] .col {
   background: transparent;
 }
 
 /* Navbar */
-[data-theme='dark'] .navbar {
-  background: rgba(17, 24, 39, 0.9);
+html[data-theme='dark'] .navbar {
+  background: rgba(4, 8, 16, 0.92);
   backdrop-filter: blur(16px);
   border-bottom: 1px solid rgba(27, 171, 83, 0.16);
 }
 
 /* Footer */
-[data-theme='dark'] .footer {
-  background: #040810;
+html[data-theme='dark'] .footer {
+  background: rgba(4, 8, 16, 0.96);
   border-top: 1px solid rgba(27, 171, 83, 0.16);
 }
 
-/* Footer links container */
+/* Sidebar */
+html[data-theme='dark'] .blog-sidebar {
+  background: transparent;
+}
+
+/* Links */
+html[data-theme='dark'] a {
+  color: var(--ifm-color-primary-light);
+}
+
+html[data-theme='dark'] a:hover {
+  color: var(--ifm-color-primary-lightest);
+}
+
+/* Search box */
+html[data-theme='dark'] .DocSearch-Button {
+  background: rgba(15, 23, 42, 0.86);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+}
+
+/* Code */
+html[data-theme='dark'] code {
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(148, 163, 184, 0.12);
+}
+
+/* Footer */
 .footer__links {
   display: flex;
   justify-content: space-between;
   gap: 2rem;
 }
 
-/* Footer columns */
 .footer__col {
   flex: 1;
   min-width: 180px;
 }
 
-/* Footer text alignment */
 .footer__title,
 .footer__items {
   text-align: center;
-}
-
-/* Blog sidebar */
-[data-theme='dark'] .blog-sidebar {
-  background: transparent;
-}
-
-/* Blog article cards / previews */
-[data-theme='dark'] .blog-list-page article,
-[data-theme='dark'] .theme-blog-post {
-  background: rgba(2, 6, 23, 0.42);
-  border: 1px solid rgba(27, 171, 83, 0.12);
-  border-radius: 24px;
-  padding: 2rem;
-}
-
-/* Links and titles */
-[data-theme='dark'] a {
-  color: var(--ifm-color-primary-light);
-}
-
-[data-theme='dark'] a:hover {
-  color: var(--ifm-color-primary-lightest);
-}
-
-/* Search box */
-[data-theme='dark'] .DocSearch-Button {
-  background: rgba(15, 23, 42, 0.86);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-}
-
-/* Code blocks */
-[data-theme='dark'] code {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.12);
 }
 
 /* Mobile footer layout */
