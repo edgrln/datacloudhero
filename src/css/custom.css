@@ -4,7 +4,7 @@
  * work well for content-centric websites.
  */
 
-/* Light theme */
+/* You can override the default Infima variables here. */
 :root {
   --ifm-color-primary: #2e8555;
   --ifm-color-primary-dark: #29784c;
@@ -13,12 +13,11 @@
   --ifm-color-primary-light: #33925d;
   --ifm-color-primary-lighter: #359962;
   --ifm-color-primary-lightest: #3cad6e;
-
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
 
-/* Dark theme */
+/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
   --ifm-color-primary: #1bab53;
   --ifm-color-primary-dark: #189a4b;
@@ -27,176 +26,26 @@
   --ifm-color-primary-light: #1ebc5b;
   --ifm-color-primary-lighter: #1fc55f;
   --ifm-color-primary-lightest: #25dd6c;
-
-  --ifm-background-color: #040810;
-  --ifm-background-surface-color: transparent;
-  --ifm-navbar-background-color: rgba(4, 8, 16, 0.92);
-  --ifm-footer-background-color: #040810;
-
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: #07111f;
+  --docusaurus-highlighted-code-line-bg: #040810;
 }
 
-/* One global background for the whole site */
-html[data-theme='dark'],
-html[data-theme='dark'] body {
-  min-height: 100%;
-  background-color: #040810;
-}
-
-/* Background gradient */
-html[data-theme='dark'] body {
-  background:
-    radial-gradient(circle at 20% 15%, rgba(27, 171, 83, 0.12), transparent 28%),
-    radial-gradient(circle at 80% 10%, rgba(59, 130, 246, 0.08), transparent 24%),
-    linear-gradient(135deg, #040810 0%, #07111f 55%, #0f172a 100%);
-  color: #e5e7eb;
-}
-
-/* Grid overlay */
-html[data-theme='dark'] body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(27, 171, 83, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(27, 171, 83, 0.06) 1px, transparent 1px);
-  background-size: 72px 72px;
-}
-
-/* Put Docusaurus content above the grid */
-html[data-theme='dark'] #__docusaurus {
-  position: relative;
-  z-index: 1;
-  background: transparent;
-  min-height: 100vh;
-}
-
-/* Make main wrappers transparent */
-html[data-theme='dark'] .main-wrapper,
-html[data-theme='dark'] main,
-html[data-theme='dark'] article,
-html[data-theme='dark'] .container,
-html[data-theme='dark'] .row,
-html[data-theme='dark'] .col {
-  background: transparent;
-}
-
-/* Navbar */
-html[data-theme='dark'] .navbar {
-  background: rgba(4, 8, 16, 0.92);
-  backdrop-filter: blur(16px);
-  border-bottom: 1px solid rgba(27, 171, 83, 0.16);
-}
 
 /* Footer */
-html[data-theme='dark'] .footer {
-  background: rgba(4, 8, 16, 0.96);
-  border-top: 1px solid rgba(27, 171, 83, 0.16);
-}
-
-/* Sidebar */
-html[data-theme='dark'] .blog-sidebar {
-  background: transparent;
-}
-
-/* Links */
-html[data-theme='dark'] a {
-  color: var(--ifm-color-primary-light);
-}
-
-html[data-theme='dark'] a:hover {
-  color: var(--ifm-color-primary-lightest);
-}
-
-/* Search box */
-html[data-theme='dark'] .DocSearch-Button {
-  background: rgba(15, 23, 42, 0.86);
-  border: 1px solid rgba(148, 163, 184, 0.16);
-}
-
-/* Code */
-html[data-theme='dark'] code {
-  background: rgba(15, 23, 42, 0.8);
-  border: 1px solid rgba(148, 163, 184, 0.12);
-}
-
-/* Footer */
+/* Контейнер ссылок футера */
 .footer__links {
   display: flex;
-  justify-content: space-between;
-  gap: 2rem;
+  justify-content: space-between; /* равномерное распределение */
+  gap: 2rem;                    /*  расстояние между колонками */
 }
 
+/* Колонки футера одинаковой ширины */
 .footer__col {
   flex: 1;
-  min-width: 180px;
+  min-width: 180px;               /* чтобы не ломалось на маленьких экранах */
 }
 
+/* (необязательно) выровнять заголовки и ссылки */
 .footer__title,
 .footer__items {
   text-align: center;
-}
-
-/* Mobile footer layout */
-@media (max-width: 768px) {
-  .footer__links {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .footer__col {
-    width: 100%;
-  }
-}
-
-/* Fix Docusaurus blog backgrounds */
-html[data-theme='dark'] aside,
-html[data-theme='dark'] [class*='blogSidebar'],
-html[data-theme='dark'] [class*='sidebar'],
-html[data-theme='dark'] [class*='blogPostPage'],
-html[data-theme='dark'] [class*='blogPostItem'],
-html[data-theme='dark'] [class*='blogPostContent'],
-html[data-theme='dark'] [class*='blogPostData'],
-html[data-theme='dark'] [class*='blogPostDetails'],
-html[data-theme='dark'] [class*='blogPostHeader'],
-html[data-theme='dark'] .theme-blog-post,
-html[data-theme='dark'] .theme-blog-post header,
-html[data-theme='dark'] .theme-blog-post article {
-  background: transparent !important;
-  background-color: transparent !important;
-  box-shadow: none !important;
-}
-
-/* Left column: All posts */
-html[data-theme='dark'] aside,
-html[data-theme='dark'] aside nav,
-html[data-theme='dark'] aside div,
-html[data-theme='dark'] [class*='blogSidebar'] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Main article area */
-html[data-theme='dark'] .main-wrapper,
-html[data-theme='dark'] main,
-html[data-theme='dark'] article,
-html[data-theme='dark'] .container,
-html[data-theme='dark'] .row,
-html[data-theme='dark'] .col,
-html[data-theme='dark'] [class*='docMainContainer'],
-html[data-theme='dark'] [class*='generatedIndexPage'],
-html[data-theme='dark'] [class*='blogLayout'],
-html[data-theme='dark'] [class*='blogPostPage'] {
-  background: transparent !important;
-  background-color: transparent !important;
-}
-
-/* Remove possible article card background */
-html[data-theme='dark'] .theme-blog-post {
-  border: none !important;
-  border-radius: 0 !important;
-  padding: 0 !important;
-}
+} 
