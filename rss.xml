@@ -16,6 +16,8 @@
             <description><![CDATA[Пишем текст статьи...]]></description>
             <content:encoded><![CDATA[<p>Пишем текст статьи...</p>
 <section style="display:grid;gap:1rem"><h2>Напишите нам прямо здесь</h2><form style="display:grid;gap:1rem"><label>Name<input type="text" required="" style="width:100%;padding:0.75rem;font-size:1rem" name="name" value=""></label><label>Email<input type="email" required="" style="width:100%;padding:0.75rem;font-size:1rem" name="email" value=""></label><label>Message<textarea name="message" rows="6" required="" style="width:100%;padding:0.75rem;font-size:1rem"></textarea></label><button type="submit" style="padding:0.75rem 1.25rem;font-size:1rem;cursor:pointer">Send message</button></form></section>]]></content:encoded>
+            <category>hola</category>
+            <category>docusaurus</category>
         </item>
         <item>
             <title><![CDATA[First Blog Post]]></title>
