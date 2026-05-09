@@ -12,8 +12,8 @@ const BLOG = {
 
 
 const config: Config = {
-  title: 'docusaurus.com',
-  tagline: 'Dinosaurs are cool',
+  title: 'blog.datacloudhero.com - Data and AI engineering blog',
+  // tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
   // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
@@ -22,7 +22,7 @@ const config: Config = {
   // },
 
   // Set the production url of your site here
-  url: 'https://datacloudhero.com',
+  url: 'https://blog.datacloudhero.com',
   // Set the /<baseUrl>/ pathname under which your site is served
   // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
