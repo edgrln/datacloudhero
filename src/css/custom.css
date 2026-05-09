@@ -50,30 +50,10 @@
   text-align: center;
 } 
 
-/* Dark theme */
+/* Поменять фон в тёмной теме на зелёный */
 [data-theme='dark'] {
-  --ifm-background-color: #b90cd0;
-  --ifm-background-surface-color: #0fab2e;
-  --ifm-font-color-base: #f3f4f6;
-}
-
-/* Основной фон страницы */
-html,
-body,
-.main-wrapper,
-.blog-wrapper,
-.docs-wrapper {
-  background: var(--ifm-background-color);
-}
-
-/* Navbar */
-.theme-layout-navbar,
-.navbar {
-  background: #24272d;
-}
-
-/* Footer */
-.theme-layout-footer,
-.footer {
-  background: #111318;
+  --ifm-background-color: #00ff00; /* ярко-зеленый */
+  --docsearch-footer-background: #00ff00; /* например, для футера поиска */
+  --docsearch-modal-background: #00ff00; /* для модального окна поиска */
+  /* добавьте сюда другие переменные, если нужно */
 }
