@@ -27,7 +27,6 @@
   --ifm-color-primary-lighter: #1fc55f;
   --ifm-color-primary-lightest: #25dd6c;
   --docusaurus-highlighted-code-line-bg: #040810;
-  --ifm-background-color: #040810;
 }
 
 
@@ -50,3 +49,31 @@
 .footer__items {
   text-align: center;
 } 
+
+/* Dark theme */
+[data-theme='dark'] {
+  --ifm-background-color: #b90cd0;
+  --ifm-background-surface-color: #0fab2e;
+  --ifm-font-color-base: #f3f4f6;
+}
+
+/* Основной фон страницы */
+html,
+body,
+.main-wrapper,
+.blog-wrapper,
+.docs-wrapper {
+  background: var(--ifm-background-color);
+}
+
+/* Navbar */
+.theme-layout-navbar,
+.navbar {
+  background: #24272d;
+}
+
+/* Footer */
+.theme-layout-footer,
+.footer {
+  background: #111318;
+}
