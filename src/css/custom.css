@@ -151,3 +151,52 @@ html[data-theme='dark'] code {
     width: 100%;
   }
 }
+
+/* Fix Docusaurus blog backgrounds */
+html[data-theme='dark'] aside,
+html[data-theme='dark'] [class*='blogSidebar'],
+html[data-theme='dark'] [class*='sidebar'],
+html[data-theme='dark'] [class*='blogPostPage'],
+html[data-theme='dark'] [class*='blogPostItem'],
+html[data-theme='dark'] [class*='blogPostContent'],
+html[data-theme='dark'] [class*='blogPostData'],
+html[data-theme='dark'] [class*='blogPostDetails'],
+html[data-theme='dark'] [class*='blogPostHeader'],
+html[data-theme='dark'] .theme-blog-post,
+html[data-theme='dark'] .theme-blog-post header,
+html[data-theme='dark'] .theme-blog-post article {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Left column: All posts */
+html[data-theme='dark'] aside,
+html[data-theme='dark'] aside nav,
+html[data-theme='dark'] aside div,
+html[data-theme='dark'] [class*='blogSidebar'] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Main article area */
+html[data-theme='dark'] .main-wrapper,
+html[data-theme='dark'] main,
+html[data-theme='dark'] article,
+html[data-theme='dark'] .container,
+html[data-theme='dark'] .row,
+html[data-theme='dark'] .col,
+html[data-theme='dark'] [class*='docMainContainer'],
+html[data-theme='dark'] [class*='generatedIndexPage'],
+html[data-theme='dark'] [class*='blogLayout'],
+html[data-theme='dark'] [class*='blogPostPage'] {
+  background: transparent !important;
+  background-color: transparent !important;
+}
+
+/* Remove possible article card background */
+html[data-theme='dark'] .theme-blog-post {
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+}
