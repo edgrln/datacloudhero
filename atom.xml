@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://blog.datacloudhero.com/</id>
-    <title>docusaurus.com Blog</title>
+    <id>https://blog.datacloudhero.com</id>
+    <title>DataCloudHero Blog</title>
     <updated>2019-05-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://blog.datacloudhero.com/"/>
-    <subtitle>docusaurus.com Blog</subtitle>
+    <link rel="alternate" href="https://blog.datacloudhero.com"/>
+    <subtitle>DataCloudHero Blog</subtitle>
     <icon>https://blog.datacloudhero.com/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[First Blog Post]]></title>
