@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="atom.xsl"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://datacloudhero.com/</id>
+    <id>https://blog.datacloudhero.com/</id>
     <title>docusaurus.com Blog</title>
     <updated>2019-05-28T00:00:00.000Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://datacloudhero.com/"/>
+    <link rel="alternate" href="https://blog.datacloudhero.com/"/>
     <subtitle>docusaurus.com Blog</subtitle>
-    <icon>https://datacloudhero.com/img/favicon.ico</icon>
+    <icon>https://blog.datacloudhero.com/img/favicon.ico</icon>
     <entry>
         <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://datacloudhero.com/first-blog-post</id>
-        <link href="https://datacloudhero.com/first-blog-post"/>
+        <id>https://blog.datacloudhero.com/first-blog-post</id>
+        <link href="https://blog.datacloudhero.com/first-blog-post"/>
         <updated>2019-05-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Lorem ipsum dolor sit amet...]]></summary>
         <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
@@ -26,8 +26,8 @@
     </entry>
     <entry>
         <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://datacloudhero.com/first-blog-post</id>
-        <link href="https://datacloudhero.com/first-blog-post"/>
+        <id>https://blog.datacloudhero.com/first-blog-post</id>
+        <link href="https://blog.datacloudhero.com/first-blog-post"/>
         <updated>2019-05-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Hahahahahahha...]]></summary>
         <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
