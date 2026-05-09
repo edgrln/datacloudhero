@@ -2,27 +2,41 @@ import {themes as prismThemes} from 'prism-react-renderer';
 import type {Config} from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
+// This runs in Node.js - Don't use client-side code here (browser APIs, JSX...)
+
 const BLOG = {
   link: '/',
-  label: 'Blog',
+  label: 'Blog'
+
 };
 
+
 const config: Config = {
-  title: 'DataCloudHero',
-  tagline: 'DataCloudHero Blog',
+  title: 'docusaurus.com',
+  tagline: 'Dinosaurs are cool',
   favicon: 'img/favicon.ico',
 
-  url: 'https://blog.datacloudhero.com',
+  // Future flags, see https://docusaurus.io/docs/api/docusaurus-config#future
+  // future: {
+  //   v4: true, // Improve compatibility with the upcoming Docusaurus v4
+  // },
+
+  // Set the production url of your site here
+  url: 'https://datacloudhero.com',
+  // Set the /<baseUrl>/ pathname under which your site is served
+  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
-  organizationName: 'edgrln',
-  projectName: 'datacloudhero',
-
-  trailingSlash: false,
+  // GitHub pages deployment config.
+  // If you aren't using GitHub pages, you don't need these.
+  organizationName: 'facebook', // Usually your GitHub org/user name.
+  projectName: 'docusaurus', // Usually your repo name.
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
 
+  // Even if you don't use internationalization, you can use this field to set
+  // useful metadata like html lang. For example, if your site is Chinese, you
+  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -35,14 +49,23 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
           onInlineTags: 'warn',
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          routeBasePath: '/',
+          routeBasePath: BLOG.link, // <-- вот это главное
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
+          // Please change this to your repo.
+          // Remove this to remove the "edit this page" links.
+          // editUrl:
+          //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
+          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -60,15 +83,16 @@ const config: Config = {
   ],
 
   plugins: [
-    [
+            [
       require.resolve('@easyops-cn/docusaurus-search-local'),
       {
         hashed: true,
       },
     ],
-  ],
+    ],
 
   themeConfig: {
+    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
@@ -77,7 +101,7 @@ const config: Config = {
       logo: {
         alt: 'datacloudhero.com',
         src: 'img/logo.svg',
-        href: 'https://datacloudhero.com',
+        href: 'https://datacloudhero.com',  // ← твой лендинг
         target: '_self',
       },
       items: [
@@ -87,16 +111,8 @@ const config: Config = {
           position: 'left',
           label: 'Tutorial',
         },
-        {
-          to: BLOG.link,
-          label: BLOG.label,
-          position: 'left',
-        },
-        {
-          to: '/contact',
-          label: 'Contact',
-          position: 'left',
-        },
+        {to: BLOG.link, label: BLOG.label, position: 'left'},
+        {to: '/contact', label: 'Contact', position: 'left'},
         {
           href: 'https://github.com/edgrln/datacloudhero',
           label: 'GitHub',
@@ -136,6 +152,7 @@ const config: Config = {
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} datacloudhero.com`,
+      
     },
     prism: {
       theme: prismThemes.github,
