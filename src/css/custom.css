@@ -53,5 +53,12 @@
 /* Поменять фон в тёмной теме на зелёный */
 [data-theme='dark'] {
   --ifm-background-color: #090B19 !important; /* ярко-зеленый */
+  --ifm-background-surface-color: #090B19 !important; /* ярко-зеленый */
   /* добавьте сюда другие переменные, если нужно */
+}
+
+.navbar {
+  background: var(--ifm-background-surface-color);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }

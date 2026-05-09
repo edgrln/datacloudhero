@@ -112,12 +112,6 @@ const config: Config = {
           label: 'Tutorial',
         },
         {to: BLOG.link, label: BLOG.label, position: 'left'},
-        {to: '/contact', label: 'Contact', position: 'left'},
-        {
-          href: 'https://github.com/edgrln/datacloudhero',
-          label: 'GitHub',
-          position: 'right',
-        },
       ],
     },
     footer: {
