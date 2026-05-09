@@ -52,7 +52,8 @@
 
 /* Поменять фон в тёмной теме на зелёный */
 [data-theme='dark'] {
-  --ifm-background-color: #00ff00; /* ярко-зеленый */
+  --ifm-background-color: #00ff00 !important; /* ярко-зеленый */
+  --background-color: #ae00ff !important;
   --docsearch-footer-background: #00ff00; /* например, для футера поиска */
   --docsearch-modal-background: #00ff00; /* для модального окна поиска */
   /* добавьте сюда другие переменные, если нужно */
