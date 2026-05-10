@@ -45,12 +45,12 @@
         <category label="docusaurus" term="docusaurus"/>
     </entry>
     <entry>
-        <title type="html"><![CDATA[First Blog Post]]></title>
-        <id>https://blog.datacloudhero.com/first-blog-post</id>
-        <link href="https://blog.datacloudhero.com/first-blog-post"/>
+        <title type="html"><![CDATA[Second Blog Post]]></title>
+        <id>https://blog.datacloudhero.com/second-blog-post</id>
+        <link href="https://blog.datacloudhero.com/second-blog-post"/>
         <updated>2019-05-28T00:00:00.000Z</updated>
         <summary type="html"><![CDATA[Hahahahahahha...]]></summary>
-        <content type="html"><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
+        <content type="html"><![CDATA[<p>Hahahahahahha...</p>
 <p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content>
         <author>
             <name>Edgar L</name>

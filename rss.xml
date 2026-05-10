@@ -34,12 +34,12 @@
             <category>docusaurus</category>
         </item>
         <item>
-            <title><![CDATA[First Blog Post]]></title>
-            <link>https://blog.datacloudhero.com/first-blog-post</link>
-            <guid>https://blog.datacloudhero.com/first-blog-post</guid>
+            <title><![CDATA[Second Blog Post]]></title>
+            <link>https://blog.datacloudhero.com/second-blog-post</link>
+            <guid>https://blog.datacloudhero.com/second-blog-post</guid>
             <pubDate>Tue, 28 May 2019 00:00:00 GMT</pubDate>
             <description><![CDATA[Hahahahahahha...]]></description>
-            <content:encoded><![CDATA[<p>Lorem ipsum dolor sit amet...</p>
+            <content:encoded><![CDATA[<p>Hahahahahahha...</p>
 <p>...consectetur adipiscing elit. Pellentesque elementum dignissim ultricies. Fusce rhoncus ipsum tempor eros aliquam consequat. Lorem ipsum dolor sit amet</p>]]></content:encoded>
             <category>hola</category>
             <category>docusaurus</category>
