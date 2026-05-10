@@ -1,4 +1,7 @@
+import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 import * as CookieConsent from '../vendor/cookieconsent/cookieconsent.esm.js';
+import '../vendor/cookieconsent/cookieconsent.css';
+
 
 const GTM_ID = 'GTM-MKSVW4QD';
 
