@@ -93,6 +93,7 @@ const config: Config = {
   plugins: [
             [
       require.resolve('@easyops-cn/docusaurus-search-local'),
+      require.resolve('./src/plugins/gtag-virtual-pageview.js'),
       {
         hashed: true,
       },
