@@ -1,11 +1,11 @@
 ---
-slug: anton-cool
-title: Антон молодец
-authors: [slorber, yangshun]
+slug: second-blog-post
+title: Second Blog Post
+authors: [edgarl, alina_lane]
 tags: [hola, docusaurus]
 ---
 
-Lorem ipsum dolor sit amet...
+Hahahahahahha...
 
 <!-- truncate -->
 
