@@ -89,17 +89,15 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-
-  plugins: [
-            [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      require.resolve('./src/plugins/gtag-virtual-pageview.js'),
-      {
-        hashed: true,
-      },
-    ],
-    ],
-
+plugins: [
+  [
+    require.resolve('@easyops-cn/docusaurus-search-local'),
+    {
+      hashed: true,
+    },
+  ],
+  require.resolve('./src/plugins/gtag-virtual-pageview.js'),
+],
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
