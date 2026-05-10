@@ -1,57 +1,65 @@
-import { useEffect } from 'react';
-import { useLocation } from '@docusaurus/router';
 import ExecutionEnvironment from '@docusaurus/ExecutionEnvironment';
 
 if (ExecutionEnvironment.canUseDOM) {
   console.log('[GTM] Client module loaded');
-  
-  window.trackVirtualPageView = function trackVirtualPageView() {
-    console.log('[GTM] trackVirtualPageView called');
-    console.log('[GTM] Has consent:', window.CookieConsent?.acceptedCategory('analytics'));
-    console.log('[GTM] Has gtag:', !!window.gtag);
-    console.log('[GTM] GTM loaded:', window.__gtmLoaded);
 
-    const hasConsent = 
-      window.CookieConsent?.acceptedCategory('analytics') || 
-      window.__gtmLoaded;
-
-    if (!hasConsent) {
-      console.log('[GTM] No consent or GTM not loaded, skipping');
-      return;
-    }
+  // Функция отправки page view
+  function trackPageView() {
+    console.log('[GTM] trackPageView called');
+    console.log('[GTM] pathname:', window.location.pathname);
+    console.log('[GTM] gtag available:', !!window.gtag);
+    console.log('[GTM] analyticsGranted:', window.CookieConsent?.acceptedCategory('analytics'));
 
     if (!window.gtag) {
-      console.log('[GTM] window.gtag not available');
+      console.log('[GTM] gtag not available yet');
       return;
     }
 
-    setTimeout(() => {
-      console.log('[GTM] Sending page_view event', {
-        page_path: window.location.pathname,
-        page_title: document.title,
-      });
+    if (!window.CookieConsent?.acceptedCategory('analytics')) {
+      console.log('[GTM] Analytics not consented');
+      return;
+    }
 
-      window.gtag('event', 'page_view', {
-        page_path: window.location.pathname,
-        page_location: window.location.href,
-        page_title: document.title,
-      });
-    }, 0);
+    console.log('[GTM] Sending page_view');
+    window.gtag('event', 'page_view', {
+      page_path: window.location.pathname,
+      page_location: window.location.href,
+      page_title: document.title,
+    });
+  }
+
+  // Слушайте изменение маршрута через history
+  let lastPath = window.location.pathname;
+
+  const originalPushState = window.history.pushState;
+  const originalReplaceState = window.history.replaceState;
+
+  window.history.pushState = function(...args) {
+    originalPushState.apply(window.history, args);
+    lastPath = window.location.pathname;
+    console.log('[GTM] pushState detected, new path:', lastPath);
+    setTimeout(trackPageView, 100);
   };
 
-  window.addEventListener('popstate', window.trackVirtualPageView);
+  window.history.replaceState = function(...args) {
+    originalReplaceState.apply(window.history, args);
+    lastPath = window.location.pathname;
+    console.log('[GTM] replaceState detected, new path:', lastPath);
+    setTimeout(trackPageView, 100);
+  };
+
+  // Слушайте popstate (кнопка "назад")
+  window.addEventListener('popstate', () => {
+    console.log('[GTM] popstate detected');
+    setTimeout(trackPageView, 100);
+  });
+
+  // Отправите первый page view при загрузке
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', trackPageView);
+  } else {
+    setTimeout(trackPageView, 1000);
+  }
 }
 
-export default function gtmVirtualPageView(props) {
-  const location = useLocation();
-
-  useEffect(() => {
-    console.log('[GTM] Route changed to:', location.pathname);
-    
-    if (ExecutionEnvironment.canUseDOM && window.trackVirtualPageView) {
-      window.trackVirtualPageView();
-    }
-  }, [location.pathname]);
-
-  return null;
-}
+export default null;
