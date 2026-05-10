@@ -34,6 +34,17 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  stylesheets: [
+    '/assets/vendor/cookieconsent/cookieconsent.css',
+  ],
+
+  scripts: [
+    {
+      src: '/assets/js/cookieconsent-config.js',
+      type: 'module',
+    },
+  ],
+
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
   // may want to replace "en" with "zh-Hans".
@@ -71,9 +82,6 @@ const config: Config = {
           onUntruncatedBlogPosts: 'warn',
           blogSidebarTitle: 'All posts',
           blogSidebarCount: 'ALL',
-        },
-        googleTagManager: {
-          containerId: 'GTM-MKSVW4QD',
         },
         theme: {
           customCss: './src/css/custom.css',
@@ -121,6 +129,10 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
+              label: BLOG.label,
+              to: BLOG.link,
+            },
+            {
               label: 'Tutorial',
               to: '/docs/intro',
             },
@@ -139,8 +151,11 @@ const config: Config = {
           title: 'More',
           items: [
             {
-              label: BLOG.label,
-              to: BLOG.link,
+              label: 'Cookie Policy',
+              to: '/cookies',
+            },
+            {
+              html: '<button type="button" data-cc="show-preferencesModal" class="footer__link cookie-settings-btn">Cookie settings</button>',
             },
           ],
         },
