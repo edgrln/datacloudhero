@@ -129,6 +129,10 @@ const config: Config = {
           title: 'Docs',
           items: [
             {
+              label: BLOG.label,
+              to: BLOG.link,
+            },
+            {
               label: 'Tutorial',
               to: '/docs/intro',
             },
@@ -146,10 +150,6 @@ const config: Config = {
         {
           title: 'More',
           items: [
-            {
-              label: BLOG.label,
-              to: BLOG.link,
-            },
             {
               label: 'Cookie Policy',
               to: '/cookies',
