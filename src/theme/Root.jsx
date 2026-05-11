@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation} from '@docusaurus/router';
 import CookieConsent from 'react-cookie-consent';
 
@@ -33,11 +33,7 @@ function denyAnalyticsConsent() {
 }
 
 function sendPageView() {
-  if (
-    typeof window === 'undefined' ||
-    typeof window.gtag !== 'function' ||
-    !hasAnalyticsConsent()
-  ) {
+  if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
     return;
   }
 
@@ -45,19 +41,26 @@ function sendPageView() {
     send_to: GA_MEASUREMENT_ID,
     page_title: document.title,
     page_location: window.location.href,
-    page_path: window.location.pathname,
+    page_path: window.location.pathname + window.location.search,
   });
 }
 
 export default function Root({children}) {
   const location = useLocation();
+  const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
 
   useEffect(() => {
-    if (hasAnalyticsConsent()) {
-      grantAnalyticsConsent();
-      sendPageView();
+    setAnalyticsAllowed(hasAnalyticsConsent());
+  }, []);
+
+  useEffect(() => {
+    if (!analyticsAllowed) {
+      return;
     }
-  }, [location.pathname]);
+
+    grantAnalyticsConsent();
+    sendPageView();
+  }, [analyticsAllowed, location.pathname, location.search]);
 
   const handleAccept = () => {
     try {
@@ -67,7 +70,7 @@ export default function Root({children}) {
     }
 
     grantAnalyticsConsent();
-    sendPageView();
+    setAnalyticsAllowed(true);
   };
 
   const handleDecline = () => {
@@ -78,6 +81,7 @@ export default function Root({children}) {
     }
 
     denyAnalyticsConsent();
+    setAnalyticsAllowed(false);
   };
 
   return (
