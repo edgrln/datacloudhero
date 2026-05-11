@@ -37,7 +37,13 @@ const config: Config = {
   stylesheets: [
     '/assets/vendor/cookieconsent/cookieconsent.css',
   ],
-  scripts: [],
+
+  scripts: [
+    {
+      src: '/assets/js/cookieconsent-config.js',
+      type: 'module',
+    },
+  ],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
@@ -83,15 +89,16 @@ const config: Config = {
       } satisfies Preset.Options,
     ],
   ],
-plugins: [
-  [
-    require.resolve('@easyops-cn/docusaurus-search-local'),
-    {
-      hashed: true,
-    },
-  ],
-  require.resolve('./src/plugins/gtag-virtual-pageview.js'),
-],
+
+  plugins: [
+            [
+      require.resolve('@easyops-cn/docusaurus-search-local'),
+      {
+        hashed: true,
+      },
+    ],
+    ],
+
   themeConfig: {
     // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
