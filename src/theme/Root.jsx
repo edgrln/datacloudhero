@@ -3,6 +3,13 @@ import CookieConsent, {Cookies} from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
 
+const COOKIE_DOMAIN =
+  typeof window !== 'undefined' &&
+  (window.location.hostname === 'datacloudhero.com' ||
+    window.location.hostname.endsWith('.datacloudhero.com'))
+    ? '.datacloudhero.com'
+    : undefined;
+
 const COOKIE_NAME = 'gtm_consent';
 const MARKETING_COOKIE_NAME = 'dch_marketing_consent';
 
@@ -10,7 +17,10 @@ function getCookieOptions() {
   return {
     expires: 180,
     sameSite: 'lax',
-    secure: typeof window !== 'undefined' && window.location.protocol === 'https:',
+    secure:
+      typeof window !== 'undefined' &&
+      window.location.protocol === 'https:',
+    domain: COOKIE_DOMAIN,
   };
 }
 
@@ -316,6 +326,7 @@ export default function Root({children}) {
         location="bottom"
         visible={forceShowCookieBanner ? 'show' : 'byCookieValue'}
         cookieName={COOKIE_NAME}
+        domain={COOKIE_DOMAIN}
         buttonText="Accept all"
         declineButtonText="Reject all"
         enableDeclineButton
