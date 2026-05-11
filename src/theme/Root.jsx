@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import CookieConsent from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
@@ -31,10 +31,21 @@ function denyAnalyticsConsent() {
   });
 }
 
-function sendCurrentPageView() {
+function sendCurrentPageViewOnce() {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
     return;
   }
+
+  const currentUrl =
+    window.location.pathname + window.location.search + window.location.hash;
+
+  window.__gaPageViewsSent = window.__gaPageViewsSent || {};
+
+  if (window.__gaPageViewsSent[currentUrl]) {
+    return;
+  }
+
+  window.__gaPageViewsSent[currentUrl] = true;
 
   window.gtag('event', 'page_view', {
     send_to: GA_MEASUREMENT_ID,
@@ -45,12 +56,13 @@ function sendCurrentPageView() {
 }
 
 export default function Root({children}) {
-  const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
-
   useEffect(() => {
     if (hasAnalyticsConsent()) {
       grantAnalyticsConsent();
-      setAnalyticsAllowed(true);
+
+      // Отправляем page_view при прямом заходе на страницу,
+      // например https://blog.datacloudhero.com/
+      sendCurrentPageViewOnce();
     }
   }, []);
 
@@ -62,11 +74,9 @@ export default function Root({children}) {
     }
 
     grantAnalyticsConsent();
-    setAnalyticsAllowed(true);
 
-    // Отправляем только текущую страницу после первого согласия.
-    // Переходы между страницами будет считать GA4 Enhanced Measurement.
-    sendCurrentPageView();
+    // Отправляем текущую страницу сразу после первого согласия.
+    sendCurrentPageViewOnce();
   };
 
   const handleDecline = () => {
@@ -77,7 +87,6 @@ export default function Root({children}) {
     }
 
     denyAnalyticsConsent();
-    setAnalyticsAllowed(false);
   };
 
   return (
