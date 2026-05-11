@@ -2,26 +2,53 @@ import React, {useEffect, useState} from 'react';
 import CookieConsent, {Cookies} from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
-const COOKIE_NAME = 'gtm_consent';
 
-function grantAnalyticsConsent() {
+const COOKIE_NAME = 'gtm_consent';
+const MARKETING_COOKIE_NAME = 'dch_marketing_consent';
+
+function getCookieOptions() {
+  return {
+    expires: 180,
+    sameSite: 'lax',
+    secure: typeof window !== 'undefined' && window.location.protocol === 'https:',
+  };
+}
+
+function getAnalyticsConsent() {
+  return Cookies.get(COOKIE_NAME) === 'true';
+}
+
+function getMarketingConsent() {
+  return Cookies.get(MARKETING_COOKIE_NAME) === 'true';
+}
+
+function updateGoogleConsent({analyticsGranted, marketingGranted}) {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
     return;
   }
 
   window.gtag('consent', 'update', {
-    analytics_storage: 'granted',
+    analytics_storage: analyticsGranted ? 'granted' : 'denied',
+
+    ad_storage: marketingGranted ? 'granted' : 'denied',
+    ad_user_data: marketingGranted ? 'granted' : 'denied',
+    ad_personalization: marketingGranted ? 'granted' : 'denied',
+
+    functionality_storage: 'granted',
+    security_storage: 'granted',
+    personalization_storage: 'denied',
   });
 }
 
-function denyAnalyticsConsent() {
-  if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
-    return;
-  }
+function saveConsent({analyticsGranted, marketingGranted}) {
+  Cookies.set(COOKIE_NAME, analyticsGranted ? 'true' : 'false', getCookieOptions());
+  Cookies.set(
+    MARKETING_COOKIE_NAME,
+    marketingGranted ? 'true' : 'false',
+    getCookieOptions(),
+  );
 
-  window.gtag('consent', 'update', {
-    analytics_storage: 'denied',
-  });
+  updateGoogleConsent({analyticsGranted, marketingGranted});
 }
 
 function sendCurrentPageViewOnce() {
@@ -48,19 +75,213 @@ function sendCurrentPageViewOnce() {
   });
 }
 
+function CookiePreferencesModal({
+  isOpen,
+  onClose,
+  analyticsEnabled,
+  marketingEnabled,
+  setAnalyticsEnabled,
+  setMarketingEnabled,
+  onAcceptAll,
+  onRejectAll,
+  onSave,
+}) {
+  if (!isOpen) {
+    return null;
+  }
+
+  return (
+    <div className="dch-cookie-modal-overlay">
+      <div
+        className="dch-cookie-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="dch-cookie-modal-title"
+      >
+        <div className="dch-cookie-modal-header">
+          <h2 id="dch-cookie-modal-title">Cookie settings</h2>
+
+          <button
+            type="button"
+            className="dch-cookie-modal-close"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+
+        <div className="dch-cookie-modal-body">
+          <section className="dch-cookie-modal-intro">
+            <h3>Cookie usage</h3>
+            <p>
+              We use cookies to keep the website working, measure traffic, and
+              improve our advertising. You can change your choices at any time.
+            </p>
+          </section>
+
+          <div className="dch-cookie-category">
+            <div className="dch-cookie-category-left">
+              <span className="dch-cookie-category-arrow">⌄</span>
+              <strong>Strictly necessary cookies</strong>
+            </div>
+
+            <button
+              type="button"
+              className="dch-cookie-switch dch-cookie-switch-on dch-cookie-switch-readonly"
+              disabled
+              aria-label="Strictly necessary cookies enabled"
+            >
+              <span>✓</span>
+            </button>
+          </div>
+
+          <div className="dch-cookie-category">
+            <div className="dch-cookie-category-left">
+              <span className="dch-cookie-category-arrow">⌄</span>
+              <strong>Analytics cookies</strong>
+            </div>
+
+            <button
+              type="button"
+              className={
+                analyticsEnabled
+                  ? 'dch-cookie-switch dch-cookie-switch-on'
+                  : 'dch-cookie-switch'
+              }
+              onClick={() => setAnalyticsEnabled((value) => !value)}
+              aria-label="Toggle analytics cookies"
+            >
+              <span>{analyticsEnabled ? '✓' : '×'}</span>
+            </button>
+          </div>
+
+          <div className="dch-cookie-category">
+            <div className="dch-cookie-category-left">
+              <span className="dch-cookie-category-arrow">⌄</span>
+              <strong>Marketing cookies</strong>
+            </div>
+
+            <button
+              type="button"
+              className={
+                marketingEnabled
+                  ? 'dch-cookie-switch dch-cookie-switch-on'
+                  : 'dch-cookie-switch'
+              }
+              onClick={() => setMarketingEnabled((value) => !value)}
+              aria-label="Toggle marketing cookies"
+            >
+              <span>{marketingEnabled ? '✓' : '×'}</span>
+            </button>
+          </div>
+
+          <section className="dch-cookie-more-info">
+            <h3>More information</h3>
+            <p>
+              For more details, please read our Privacy Policy and Cookie Policy.
+            </p>
+          </section>
+        </div>
+
+        <div className="dch-cookie-modal-footer">
+          <div className="dch-cookie-modal-footer-left">
+            <button
+              type="button"
+              className="dch-cookie-modal-btn dch-cookie-modal-btn-primary"
+              onClick={onAcceptAll}
+            >
+              Accept all
+            </button>
+
+            <button
+              type="button"
+              className="dch-cookie-modal-btn dch-cookie-modal-btn-primary"
+              onClick={onRejectAll}
+            >
+              Reject all
+            </button>
+          </div>
+
+          <button
+            type="button"
+            className="dch-cookie-modal-btn dch-cookie-modal-btn-secondary"
+            onClick={onSave}
+          >
+            Save settings
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function Root({children}) {
   const [forceShowCookieBanner, setForceShowCookieBanner] = useState(false);
+  const [isPreferencesOpen, setIsPreferencesOpen] = useState(false);
+  const [analyticsEnabled, setAnalyticsEnabled] = useState(false);
+  const [marketingEnabled, setMarketingEnabled] = useState(false);
 
-  useEffect(() => {
-    const consentValue = Cookies.get(COOKIE_NAME);
+  const openPreferences = () => {
+    setAnalyticsEnabled(getAnalyticsConsent());
+    setMarketingEnabled(getMarketingConsent());
+    setIsPreferencesOpen(true);
+  };
 
-    if (consentValue === 'true') {
-      grantAnalyticsConsent();
+  const closePreferences = () => {
+    setIsPreferencesOpen(false);
+  };
+
+  const acceptAll = () => {
+    saveConsent({
+      analyticsGranted: true,
+      marketingGranted: true,
+    });
+
+    setAnalyticsEnabled(true);
+    setMarketingEnabled(true);
+    setForceShowCookieBanner(false);
+    setIsPreferencesOpen(false);
+    sendCurrentPageViewOnce();
+  };
+
+  const rejectAll = () => {
+    saveConsent({
+      analyticsGranted: false,
+      marketingGranted: false,
+    });
+
+    setAnalyticsEnabled(false);
+    setMarketingEnabled(false);
+    setForceShowCookieBanner(false);
+    setIsPreferencesOpen(false);
+  };
+
+  const saveSettings = () => {
+    saveConsent({
+      analyticsGranted: analyticsEnabled,
+      marketingGranted: marketingEnabled,
+    });
+
+    setForceShowCookieBanner(false);
+    setIsPreferencesOpen(false);
+
+    if (analyticsEnabled) {
       sendCurrentPageViewOnce();
     }
+  };
 
-    if (consentValue === 'false') {
-      denyAnalyticsConsent();
+  useEffect(() => {
+    const analyticsGranted = getAnalyticsConsent();
+    const marketingGranted = getMarketingConsent();
+
+    updateGoogleConsent({
+      analyticsGranted,
+      marketingGranted,
+    });
+
+    if (analyticsGranted) {
+      sendCurrentPageViewOnce();
     }
   }, []);
 
@@ -79,7 +300,7 @@ export default function Root({children}) {
       }
 
       event.preventDefault();
-      setForceShowCookieBanner(true);
+      openPreferences();
     };
 
     document.addEventListener('click', openCookieSettings);
@@ -88,21 +309,6 @@ export default function Root({children}) {
       document.removeEventListener('click', openCookieSettings);
     };
   }, []);
-
-  const handleAccept = () => {
-    grantAnalyticsConsent();
-    sendCurrentPageViewOnce();
-    setForceShowCookieBanner(false);
-  };
-
-  const handleDecline = () => {
-    denyAnalyticsConsent();
-    setForceShowCookieBanner(false);
-  };
-
-  const handleCustomize = () => {
-    window.location.href = '/cookies';
-  };
 
   return (
     <>
@@ -113,8 +319,8 @@ export default function Root({children}) {
         buttonText="Accept all"
         declineButtonText="Reject all"
         enableDeclineButton
-        onAccept={handleAccept}
-        onDecline={handleDecline}
+        onAccept={acceptAll}
+        onDecline={rejectAll}
         expires={180}
         sameSite="lax"
         overlay={false}
@@ -138,7 +344,7 @@ export default function Root({children}) {
           borderRadius: '8px',
           boxShadow: '0 10px 30px rgba(0, 0, 2, 0.3)',
           overflow: 'hidden',
-          zIndex: 2147483647,
+          zIndex: 2147483646,
         }}
         contentStyle={{
           margin: 0,
@@ -196,11 +402,23 @@ export default function Root({children}) {
         <button
           type="button"
           className="dch-cookie-customize"
-          onClick={handleCustomize}
+          onClick={openPreferences}
         >
           Customize
         </button>
       </CookieConsent>
+
+      <CookiePreferencesModal
+        isOpen={isPreferencesOpen}
+        onClose={closePreferences}
+        analyticsEnabled={analyticsEnabled}
+        marketingEnabled={marketingEnabled}
+        setAnalyticsEnabled={setAnalyticsEnabled}
+        setMarketingEnabled={setMarketingEnabled}
+        onAcceptAll={acceptAll}
+        onRejectAll={rejectAll}
+        onSave={saveSettings}
+      />
 
       {children}
     </>
