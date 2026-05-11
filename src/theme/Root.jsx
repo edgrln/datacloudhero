@@ -1,15 +1,7 @@
 import React, {useEffect} from 'react';
-import CookieConsent from 'react-cookie-consent';
+import CookieConsent, {Cookies} from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
-
-function hasAnalyticsConsent() {
-  try {
-    return localStorage.getItem('gtm_consent') === 'true';
-  } catch {
-    return false;
-  }
-}
 
 function grantAnalyticsConsent() {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
@@ -57,35 +49,24 @@ function sendCurrentPageViewOnce() {
 
 export default function Root({children}) {
   useEffect(() => {
-    if (hasAnalyticsConsent()) {
-      grantAnalyticsConsent();
+    const consentValue = Cookies.get('gtm_consent');
 
-      // Отправляем page_view при прямом заходе на страницу,
-      // например https://blog.datacloudhero.com/
+    if (consentValue === 'true') {
+      grantAnalyticsConsent();
       sendCurrentPageViewOnce();
+    }
+
+    if (consentValue === 'false') {
+      denyAnalyticsConsent();
     }
   }, []);
 
   const handleAccept = () => {
-    try {
-      localStorage.setItem('gtm_consent', 'true');
-    } catch {
-      // ignore
-    }
-
     grantAnalyticsConsent();
-
-    // Отправляем текущую страницу сразу после первого согласия.
     sendCurrentPageViewOnce();
   };
 
   const handleDecline = () => {
-    try {
-      localStorage.setItem('gtm_consent', 'false');
-    } catch {
-      // ignore
-    }
-
     denyAnalyticsConsent();
   };
 
@@ -93,15 +74,28 @@ export default function Root({children}) {
     <>
       <CookieConsent
         location="bottom"
-        buttonText="Согласиться"
-        declineButtonText="Отклонить"
+        cookieName="gtm_consent"
+        buttonText="Accept all"
+        declineButtonText="Reject all"
         enableDeclineButton
         onAccept={handleAccept}
         onDecline={handleDecline}
-        style={{background: '#667eea'}}
-        buttonStyle={{background: '#fff', color: '#667eea'}}
+        expires={180}
+        sameSite="lax"
+        overlay={false}
+        containerClasses="dch-cookie-consent"
+        contentClasses="dch-cookie-content"
+        buttonClasses="dch-cookie-btn dch-cookie-btn-primary"
+        declineButtonClasses="dch-cookie-btn dch-cookie-btn-secondary"
+        style={{}}
+        buttonStyle={{}}
+        declineButtonStyle={{}}
       >
-        🍪 Мы используем cookies и аналитику
+        <div className="dch-cookie-title">We use cookies</div>
+        <div className="dch-cookie-description">
+          We use cookies to measure website usage and improve our marketing.
+          You can accept all cookies or reject optional cookies.
+        </div>
       </CookieConsent>
 
       {children}
