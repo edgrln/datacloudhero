@@ -24,6 +24,13 @@ function getCookieOptions() {
   };
 }
 
+function hasConsentChoice() {
+  return (
+    Cookies.get(COOKIE_NAME) !== undefined ||
+    Cookies.get(MARKETING_COOKIE_NAME) !== undefined
+  );
+}
+
 function getAnalyticsConsent() {
   return Cookies.get(COOKIE_NAME) === 'true';
 }
@@ -48,17 +55,33 @@ function updateGoogleConsent({analyticsGranted, marketingGranted}) {
     security_storage: 'granted',
     personalization_storage: 'denied',
   });
+
+  window.dataLayer = window.dataLayer || [];
+
+  window.dataLayer.push({
+    event: 'cookie_consent_update',
+    analytics_consent: analyticsGranted ? 'granted' : 'denied',
+    marketing_consent: marketingGranted ? 'granted' : 'denied',
+  });
 }
 
 function saveConsent({analyticsGranted, marketingGranted}) {
-  Cookies.set(COOKIE_NAME, analyticsGranted ? 'true' : 'false', getCookieOptions());
+  Cookies.set(
+    COOKIE_NAME,
+    analyticsGranted ? 'true' : 'false',
+    getCookieOptions(),
+  );
+
   Cookies.set(
     MARKETING_COOKIE_NAME,
     marketingGranted ? 'true' : 'false',
     getCookieOptions(),
   );
 
-  updateGoogleConsent({analyticsGranted, marketingGranted});
+  updateGoogleConsent({
+    analyticsGranted,
+    marketingGranted,
+  });
 }
 
 function sendCurrentPageViewOnce() {
@@ -252,6 +275,7 @@ export default function Root({children}) {
     setMarketingEnabled(true);
     setForceShowCookieBanner(false);
     setIsPreferencesOpen(false);
+
     sendCurrentPageViewOnce();
   };
 
@@ -265,6 +289,8 @@ export default function Root({children}) {
     setMarketingEnabled(false);
     setForceShowCookieBanner(false);
     setIsPreferencesOpen(false);
+
+    sendCurrentPageViewOnce();
   };
 
   const saveSettings = () => {
@@ -276,9 +302,7 @@ export default function Root({children}) {
     setForceShowCookieBanner(false);
     setIsPreferencesOpen(false);
 
-    if (analyticsEnabled) {
-      sendCurrentPageViewOnce();
-    }
+    sendCurrentPageViewOnce();
   };
 
   useEffect(() => {
@@ -290,7 +314,7 @@ export default function Root({children}) {
       marketingGranted,
     });
 
-    if (analyticsGranted) {
+    if (hasConsentChoice()) {
       sendCurrentPageViewOnce();
     }
   }, []);
