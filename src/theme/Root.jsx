@@ -1,7 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import CookieConsent, {Cookies} from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
+const COOKIE_NAME = 'gtm_consent';
 
 function grantAnalyticsConsent() {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
@@ -48,8 +49,10 @@ function sendCurrentPageViewOnce() {
 }
 
 export default function Root({children}) {
+  const [forceShowCookieBanner, setForceShowCookieBanner] = useState(false);
+
   useEffect(() => {
-    const consentValue = Cookies.get('gtm_consent');
+    const consentValue = Cookies.get(COOKIE_NAME);
 
     if (consentValue === 'true') {
       grantAnalyticsConsent();
@@ -61,20 +64,52 @@ export default function Root({children}) {
     }
   }, []);
 
+  useEffect(() => {
+    const openCookieSettings = (event) => {
+      const target = event.target;
+
+      if (!(target instanceof HTMLElement)) {
+        return;
+      }
+
+      const button = target.closest('.cookie-settings-btn');
+
+      if (!button) {
+        return;
+      }
+
+      event.preventDefault();
+      setForceShowCookieBanner(true);
+    };
+
+    document.addEventListener('click', openCookieSettings);
+
+    return () => {
+      document.removeEventListener('click', openCookieSettings);
+    };
+  }, []);
+
   const handleAccept = () => {
     grantAnalyticsConsent();
     sendCurrentPageViewOnce();
+    setForceShowCookieBanner(false);
   };
 
   const handleDecline = () => {
     denyAnalyticsConsent();
+    setForceShowCookieBanner(false);
+  };
+
+  const handleCustomize = () => {
+    window.location.href = '/cookies';
   };
 
   return (
     <>
       <CookieConsent
         location="bottom"
-        cookieName="gtm_consent"
+        visible={forceShowCookieBanner ? 'show' : 'byCookieValue'}
+        cookieName={COOKIE_NAME}
         buttonText="Accept all"
         declineButtonText="Reject all"
         enableDeclineButton
@@ -161,9 +196,7 @@ export default function Root({children}) {
         <button
           type="button"
           className="dch-cookie-customize"
-          onClick={() => {
-            window.location.href = '/cookies';
-          }}
+          onClick={handleCustomize}
         >
           Customize
         </button>

@@ -182,7 +182,7 @@ const config: Config = {
               to: '/cookies',
             },
             {
-              html: '<button type="button" data-cc="show-preferencesModal" class="footer__link cookie-settings-btn">Cookie settings</button>',
+              html: '<button type="button" class="footer__link cookie-settings-btn">Cookie settings</button>',
             },
           ],
         },
