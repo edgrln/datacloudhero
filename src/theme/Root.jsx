@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import {useLocation} from '@docusaurus/router';
 import CookieConsent from 'react-cookie-consent';
 
 const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
@@ -32,7 +31,7 @@ function denyAnalyticsConsent() {
   });
 }
 
-function sendPageView() {
+function sendCurrentPageView() {
   if (typeof window === 'undefined' || typeof window.gtag !== 'function') {
     return;
   }
@@ -46,21 +45,14 @@ function sendPageView() {
 }
 
 export default function Root({children}) {
-  const location = useLocation();
   const [analyticsAllowed, setAnalyticsAllowed] = useState(false);
 
   useEffect(() => {
-    setAnalyticsAllowed(hasAnalyticsConsent());
-  }, []);
-
-  useEffect(() => {
-    if (!analyticsAllowed) {
-      return;
+    if (hasAnalyticsConsent()) {
+      grantAnalyticsConsent();
+      setAnalyticsAllowed(true);
     }
-
-    grantAnalyticsConsent();
-    sendPageView();
-  }, [analyticsAllowed, location.pathname, location.search]);
+  }, []);
 
   const handleAccept = () => {
     try {
@@ -71,6 +63,10 @@ export default function Root({children}) {
 
     grantAnalyticsConsent();
     setAnalyticsAllowed(true);
+
+    // Отправляем только текущую страницу после первого согласия.
+    // Переходы между страницами будет считать GA4 Enhanced Measurement.
+    sendCurrentPageView();
   };
 
   const handleDecline = () => {
