@@ -34,16 +34,32 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
-  stylesheets: [
-    '/assets/vendor/cookieconsent/cookieconsent.css',
-  ],
+// ДОБАВЬТЕ ВМЕСТО НИХ:
+headTags: [
+  {
+    tagName: 'script',
+    innerHTML: `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('consent', 'default', {
+        'analytics_storage': 'denied'
+      });
+      const consent = localStorage.getItem('gtm_consent');
+      if (consent === 'true') {
+        gtag('consent', 'update', {
+          'analytics_storage': 'granted'
+        });
+      }
+    `,
+  },
+],
 
-  scripts: [
-    {
-      src: '/assets/js/cookieconsent-config.js',
-      type: 'module',
-    },
-  ],
+scripts: [
+  {
+    src: 'https://www.googletagmanager.com/gtag/js?id=G-23MF8B8LYG',
+    async: true,
+  },
+],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
