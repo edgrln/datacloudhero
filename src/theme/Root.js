@@ -93,6 +93,8 @@ export default function Root({children}) {
             loadGtm();
           }
         }
+        // Сделать CookieConsent доступной глобально для кнопок
+        window.CookieConsent = CookieConsent;
 
         CookieConsent.run({
           mode: 'opt-in',
