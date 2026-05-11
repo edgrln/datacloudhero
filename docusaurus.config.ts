@@ -6,10 +6,8 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const BLOG = {
   link: '/',
-  label: 'Blog'
-
+  label: 'Blog',
 };
-
 
 const config: Config = {
   title: 'blog.datacloudhero.com - Data and AI engineering blog',
@@ -23,47 +21,27 @@ const config: Config = {
 
   // Set the production url of your site here
   url: 'https://blog.datacloudhero.com',
+
   // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
   baseUrl: '/',
 
   // GitHub pages deployment config.
   // If you aren't using GitHub pages, you don't need these.
-  organizationName: 'facebook', // Usually your GitHub org/user name.
-  projectName: 'docusaurus', // Usually your repo name.
+  organizationName: 'facebook',
+  projectName: 'docusaurus',
 
   onBrokenLinks: 'throw',
 
-// ДОБАВЬТЕ ВМЕСТО НИХ:
-headTags: [
-  {
-    tagName: 'script',
-    innerHTML: `
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('consent', 'default', {
-        'analytics_storage': 'denied'
-      });
-      const consent = localStorage.getItem('gtm_consent');
-      if (consent === 'true') {
-        gtag('consent', 'update', {
-          'analytics_storage': 'granted'
-        });
-      }
-    `,
-  },
-],
+  scripts: [
+    {
+      src: '/js/gtag-consent.js',
+    },
+    {
+      src: 'https://www.googletagmanager.com/gtag/js?id=G-23MF8B8LYG',
+      async: true,
+    },
+  ],
 
-scripts: [
-  {
-    src: 'https://www.googletagmanager.com/gtag/js?id=G-23MF8B8LYG',
-    async: true,
-  },
-],
-
-  // Even if you don't use internationalization, you can use this field to set
-  // useful metadata like html lang. For example, if your site is Chinese, you
-  // may want to replace "en" with "zh-Hans".
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
@@ -76,23 +54,18 @@ scripts: [
         docs: {
           sidebarPath: './sidebars.ts',
           onInlineTags: 'warn',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
         },
         blog: {
-          routeBasePath: BLOG.link, // <-- вот это главное
+          routeBasePath: BLOG.link,
           showReadingTime: true,
           feedOptions: {
             type: ['rss', 'atom'],
             xslt: true,
           },
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           // editUrl:
           //   'https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/',
-          // Useful options to enforce blogging best practices
           onInlineTags: 'warn',
           onInlineAuthors: 'warn',
           onUntruncatedBlogPosts: 'warn',
@@ -107,16 +80,15 @@ scripts: [
   ],
 
   plugins: [
-            [
+    [
       require.resolve('@easyops-cn/docusaurus-search-local'),
       {
         hashed: true,
       },
     ],
-    ],
+  ],
 
   themeConfig: {
-    // Replace with your project's social card
     image: 'img/docusaurus-social-card.jpg',
     colorMode: {
       respectPrefersColorScheme: true,
@@ -125,7 +97,7 @@ scripts: [
       logo: {
         alt: 'datacloudhero.com',
         src: 'img/logo.svg',
-        href: 'https://datacloudhero.com',  // ← твой лендинг
+        href: 'https://datacloudhero.com',
         target: '_self',
       },
       items: [
@@ -135,7 +107,11 @@ scripts: [
           position: 'left',
           label: 'Tutorial',
         },
-        {to: BLOG.link, label: BLOG.label, position: 'left'},
+        {
+          to: BLOG.link,
+          label: BLOG.label,
+          position: 'left',
+        },
       ],
     },
     footer: {
@@ -177,7 +153,6 @@ scripts: [
         },
       ],
       copyright: `Copyright © ${new Date().getFullYear()} datacloudhero.com`,
-      
     },
     prism: {
       theme: prismThemes.github,
