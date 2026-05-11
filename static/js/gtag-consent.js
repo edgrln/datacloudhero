@@ -1,21 +1,27 @@
 window.dataLayer = window.dataLayer || [];
 
-function gtag() {
+window.gtag = function gtag() {
   window.dataLayer.push(arguments);
-}
+};
 
-gtag('consent', 'default', {
+window.gtag('consent', 'default', {
   analytics_storage: 'denied',
+});
+
+window.gtag('js', new Date());
+
+window.gtag('config', 'G-23MF8B8LYG', {
+  send_page_view: false,
 });
 
 try {
   const consent = localStorage.getItem('gtm_consent');
 
   if (consent === 'true') {
-    gtag('consent', 'update', {
+    window.gtag('consent', 'update', {
       analytics_storage: 'granted',
     });
   }
 } catch (error) {
-  console.warn('Unable to read GTM consent from localStorage:', error);
+  console.warn('Unable to read GA consent from localStorage:', error);
 }

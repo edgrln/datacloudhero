@@ -9,6 +9,8 @@ const BLOG = {
   label: 'Blog',
 };
 
+const GA_MEASUREMENT_ID = 'G-23MF8B8LYG';
+
 const config: Config = {
   title: 'blog.datacloudhero.com - Data and AI engineering blog',
   // tagline: 'Dinosaurs are cool',
@@ -32,12 +34,45 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML: `
+        window.dataLayer = window.dataLayer || [];
+
+        window.gtag = function gtag() {
+          window.dataLayer.push(arguments);
+        };
+
+        window.gtag('consent', 'default', {
+          analytics_storage: 'denied',
+        });
+
+        window.gtag('js', new Date());
+
+        window.gtag('config', '${GA_MEASUREMENT_ID}', {
+          send_page_view: false,
+        });
+
+        try {
+          const consent = localStorage.getItem('gtm_consent');
+
+          if (consent === 'true') {
+            window.gtag('consent', 'update', {
+              analytics_storage: 'granted',
+            });
+          }
+        } catch (error) {
+          console.warn('Unable to read GA consent from localStorage:', error);
+        }
+      `,
+    },
+  ],
+
   scripts: [
     {
-      src: '/js/gtag-consent.js',
-    },
-    {
-      src: 'https://www.googletagmanager.com/gtag/js?id=G-23MF8B8LYG',
+      src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
       async: true,
     },
   ],
