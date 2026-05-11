@@ -357,7 +357,13 @@ export default function Root({children}) {
         location="bottom"
         visible={forceShowCookieBanner ? 'show' : 'byCookieValue'}
         cookieName={COOKIE_NAME}
-        domain={COOKIE_DOMAIN}
+        extraCookieOptions={
+                              COOKIE_DOMAIN
+                                ? {
+                                    domain: COOKIE_DOMAIN,
+                                  }
+                                : {}
+                            }
         buttonText="Accept all"
         declineButtonText="Reject all"
         enableDeclineButton
