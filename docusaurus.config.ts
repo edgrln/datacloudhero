@@ -38,12 +38,13 @@ const config: Config = {
     '/assets/vendor/cookieconsent/cookieconsent.css',
   ],
 
-  scripts: [
-    {
-      src: '/assets/js/cookieconsent-config.js',
-      type: 'module',
-    },
-  ],
+scripts: [
+  {
+    src: '/assets/js/cookieconsent-config.js',
+    async: false,  // Загружается последовательно
+    defer: false,  // Блокирует парсинг до загрузки
+  },
+],
 
   // Even if you don't use internationalization, you can use this field to set
   // useful metadata like html lang. For example, if your site is Chinese, you
