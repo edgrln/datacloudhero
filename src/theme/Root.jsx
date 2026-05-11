@@ -12,6 +12,7 @@ const COOKIE_DOMAIN =
 
 const COOKIE_NAME = 'gtm_consent';
 const MARKETING_COOKIE_NAME = 'dch_marketing_consent';
+const CONSENT_UPDATED_AT_COOKIE = 'dch_consent_updated_at';
 
 function getCookieOptions() {
   return {
@@ -75,6 +76,12 @@ function saveConsent({analyticsGranted, marketingGranted}) {
   Cookies.set(
     MARKETING_COOKIE_NAME,
     marketingGranted ? 'true' : 'false',
+    getCookieOptions(),
+  );
+
+  Cookies.set(
+    CONSENT_UPDATED_AT_COOKIE,
+    String(Date.now()),
     getCookieOptions(),
   );
 
