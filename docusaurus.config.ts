@@ -41,8 +41,8 @@ const config: Config = {
 scripts: [
   {
     src: '/assets/js/cookieconsent-config.js',
-    async: false,  // Загружается последовательно
-    defer: false,  // Блокирует парсинг до загрузки
+    type: 'module',      // ← ВАЖНО
+    async: false,        // ← ВАЖНО
   },
 ],
 
