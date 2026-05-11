@@ -29,32 +29,30 @@
   --docusaurus-highlighted-code-line-bg: #040810;
 }
 
-
 /* Footer */
 /* Контейнер ссылок футера */
 .footer__links {
   display: flex;
-  justify-content: space-between; /* равномерное распределение */
-  gap: 2rem;                    /*  расстояние между колонками */
+  justify-content: space-between;
+  gap: 2rem;
 }
 
 /* Колонки футера одинаковой ширины */
 .footer__col {
   flex: 1;
-  min-width: 180px;               /* чтобы не ломалось на маленьких экранах */
+  min-width: 180px;
 }
 
 /* (необязательно) выровнять заголовки и ссылки */
 .footer__title,
 .footer__items {
   text-align: center;
-} 
+}
 
-/* Поменять фон в тёмной теме на зелёный */
+/* Поменять фон в тёмной теме */
 [data-theme='dark'] {
-  --ifm-background-color: #090B19 !important; /* ярко-зеленый */
-  --ifm-background-surface-color: #090B19 !important; /* ярко-зеленый */
-  /* добавьте сюда другие переменные, если нужно */
+  --ifm-background-color: #090b19 !important;
+  --ifm-background-surface-color: #090b19 !important;
 }
 
 .cookie-settings-btn {
@@ -297,16 +295,24 @@
   line-height: 1;
 }
 
+/* Cookie modal toggles */
+
 .dch-cookie-switch {
   width: 74px;
   height: 38px;
   position: relative;
+  flex-shrink: 0;
   border: 0;
   border-radius: 999px;
   background: #667481;
   cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease,
+    opacity 0.2s ease;
 }
 
+/* OFF knob */
 .dch-cookie-switch span {
   position: absolute;
   top: 2px;
@@ -319,23 +325,51 @@
   border-radius: 999px;
   background: #ffffff;
   color: #667481;
-  font-size: 1.6rem;
+  font-size: 1.55rem;
+  font-weight: 700;
   line-height: 1;
-  transition: transform 0.2s ease;
+  box-shadow: 0 1px 3px rgba(15, 23, 42, 0.25);
+  transform: translateX(0);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
+/* ON state */
 .dch-cookie-switch-on {
-  background: #d5dee2;
+  background: #1bab53;
 }
 
 .dch-cookie-switch-on span {
   transform: translateX(36px);
+  color: #1bab53;
+}
+
+/* Readonly necessary cookies */
+.dch-cookie-switch-readonly {
+  background: #d5dee2;
+  cursor: not-allowed;
+  opacity: 1;
+}
+
+.dch-cookie-switch-readonly span {
+  transform: translateX(36px);
   color: #d5dee2;
 }
 
-.dch-cookie-switch-readonly {
+/* Hover / focus */
+.dch-cookie-switch:hover:not(:disabled) {
+  box-shadow: 0 0 0 4px rgba(27, 171, 83, 0.14);
+}
+
+.dch-cookie-switch:focus-visible {
+  outline: 3px solid rgba(27, 171, 83, 0.3);
+  outline-offset: 3px;
+}
+
+.dch-cookie-switch:disabled {
   cursor: not-allowed;
-  opacity: 0.85;
 }
 
 .dch-cookie-more-info {
