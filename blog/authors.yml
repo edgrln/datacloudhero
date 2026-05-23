@@ -1,6 +1,6 @@
 edgarl:
   name: Edgar L
-  title: AI & Data Engineer, Co-founder datacloud.com
+  title: Technical Content Writer — AI & Data
   # image_url: ./img/authors/edgarl.jpeg
   image_url: https://avatars.githubusercontent.com/u/78014277?v=4
   page:
@@ -11,7 +11,7 @@ edgarl:
 
 alina_lane:
   name: Alina Lane
-  title: CMO, Co-founder datacloud.com
+  title: Founder datacloud.com
   image_url: https://avatars.githubusercontent.com/u/253337931?v=4
   page:
     # customize the url of the author page at /blog/authors/<permalink>
