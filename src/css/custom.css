@@ -31,14 +31,68 @@
 
 
 .cookie-settings-page-btn {
-  margin: 1rem 0 0.5rem;
-  border-radius: 0.5rem;
-  font-weight: 700;
-  text-decoration: none;
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  width: min(100%, 640px);
+  min-height: 84px;
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem 2rem;
+
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  border-radius: 1.5rem;
+
+  background: #16a34a;
+  color: #ffffff;
+
+  font: inherit;
+  font-size: 1.55rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+
+  cursor: pointer;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.25),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+
+  transition:
+    transform 0.15s ease,
+    background-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .cookie-settings-page-btn:hover {
+  background: #15803d;
+  color: #ffffff;
   text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow:
+    0 14px 30px rgba(0, 0, 0, 0.3),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.2);
+}
+
+.cookie-settings-page-btn:active {
+  transform: translateY(1px);
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.25),
+    inset 0 2px 0 rgba(0, 0, 0, 0.18);
+}
+
+.cookie-settings-page-btn:focus-visible {
+  outline: 3px solid rgba(27, 171, 83, 0.45);
+  outline-offset: 4px;
+}
+
+@media (max-width: 640px) {
+  .cookie-settings-page-btn {
+    width: 100%;
+    min-height: 68px;
+    border-radius: 1rem;
+    font-size: 1.25rem;
+  }
 }
 
 /* Footer */
