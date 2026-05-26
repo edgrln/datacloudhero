@@ -29,6 +29,18 @@
   --docusaurus-highlighted-code-line-bg: #040810;
 }
 
+
+.cookie-settings-page-btn {
+  margin: 1rem 0 0.5rem;
+  border-radius: 0.5rem;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.cookie-settings-page-btn:hover {
+  text-decoration: none;
+}
+
 /* Footer */
 /* Контейнер ссылок футера */
 .footer__links {
@@ -57,8 +69,6 @@
 
 .footer .cookie-settings-btn {
   appearance: none;
-  display: block;
-  width: 100%;
   background: none;
   border: 0;
   padding: 0;
@@ -68,12 +78,29 @@
   line-height: 2;
   color: var(--ifm-footer-link-color);
   cursor: pointer;
-  text-align: left;
 }
 
 .footer .cookie-settings-btn:hover {
   color: var(--ifm-footer-link-hover-color);
   text-decoration: underline;
+}
+
+/* Desktop: кнопка по центру, как обычная footer-ссылка */
+@media (min-width: 997px) {
+  .footer .cookie-settings-btn {
+    display: inline;
+    width: auto;
+    text-align: center;
+  }
+}
+
+/* Mobile / tablet: кнопка выравнивается как Cookie Policy */
+@media (max-width: 996px) {
+  .footer .cookie-settings-btn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
 }
 
 .dch-cookie-consent {
