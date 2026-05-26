@@ -55,18 +55,25 @@
   --ifm-background-surface-color: #090b19 !important;
 }
 
-.cookie-settings-btn {
+.footer .cookie-settings-btn {
+  appearance: none;
+  display: block;
+  width: 100%;
   background: none;
   border: 0;
   padding: 0;
+  margin: 0;
+
   font: inherit;
+  line-height: 2;
   color: var(--ifm-footer-link-color);
   cursor: pointer;
   text-align: left;
 }
 
-.cookie-settings-btn:hover {
+.footer .cookie-settings-btn:hover {
   color: var(--ifm-footer-link-hover-color);
+  text-decoration: underline;
 }
 
 .dch-cookie-consent {
